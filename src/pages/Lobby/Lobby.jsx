@@ -21,7 +21,7 @@ export const Lobby = () => {
   }
   const joinRoom = () => {
     console.log("click")
-    socket.emit('join-room', { roomName: 'a', namePlayer: user.name});
+    socket.emit('join-room', { roomName: 'abc', namePlayer: user.name});
   }
   return (
     <>
