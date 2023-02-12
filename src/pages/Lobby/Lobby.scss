@@ -1,0 +1,21 @@
+.container-menu-lobby{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 20vh;
+}
+.container-room{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    margin: 20px;
+}
+.button-create{
+    background-image: url('../../assets/CreateRoom.jpg');
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    border-radius: 0;
+}
+p{
+    font-weight: 750;
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+}
