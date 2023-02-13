@@ -62,9 +62,6 @@ export const RoomItem = ({ room }) => {
           alt="Live from space album cover"
         />
       </Card>
-      {/* <Modal className="modal-lobby" open={openModal} onClose={handleModal} >
-        <p>Hola mundo</p>
-      </Modal> */}
       <Dialog
         open={openModal}
         onClose={handleModal}

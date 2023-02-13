@@ -6,6 +6,7 @@ import { UserContext } from "../../context/UserContext";
 
 export const NavBar = () => {
   const {user} = useContext(UserContext)
+  // console.log("USER", user)
   return (
     <AppBar
       sx={{
