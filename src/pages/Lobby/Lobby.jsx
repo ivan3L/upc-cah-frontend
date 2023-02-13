@@ -4,11 +4,10 @@ import { RoomList } from "../../components/RoomList/RoomList";
 import "./Lobby.scss";
 import AddIcon from "@mui/icons-material/Add";
 import GroupsIcon from "@mui/icons-material/Groups";
-import { getWebSocket } from "../../services/websocket/websocket";
 import io from "socket.io-client";
 import { UserContext } from "../../context/UserContext";
 import { v4 as uuidv4 } from "uuid";
-// import { DialogCreateRoom } from "../../components/Dialog/DialogCreateRoom/DialogCreateRoom";
+import { DialogCreateRoom } from "../../components/Dialogs/DialogCreateRoom/DialogCreateRoom";
 
 export const Lobby = () => {
   const [openModal, setopenModal] = useState(false);
@@ -50,20 +49,20 @@ export const Lobby = () => {
           sx={{
             color: "black",
           }}
-          onClick={createRoom}
+          onClick={handleModal}
         >
           <div>
             <AddIcon sx={{ height: "30px", width: "2em" }} />
             <p>Create</p>
           </div>
         </Button>
-        {/* <Dialog
+        <Dialog
           open={openModal}
           onClose={handleModal}
           className="animate__animated animate__backInDown"
         >
           <DialogCreateRoom/>
-        </Dialog> */}
+        </Dialog>
       </div>
       <div className="container-room">
         <RoomList />

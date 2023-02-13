@@ -14,7 +14,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import imagen from "../../assets/logo.png";
 import "./RoomItem.scss";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { DialogPassword } from "../DialogPassword/DialogPassword";
+import { DialogPassword } from "../../components/Dialogs/DialogPassword/DialogPassword";
 
 export const RoomItem = ({ room }) => {
   console.log(room);
