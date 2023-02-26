@@ -7,7 +7,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./RoomItem.scss";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -15,26 +15,37 @@ import imagen from "../../assets/logo.png";
 import "./RoomItem.scss";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { DialogPassword } from "../../components/Dialogs/DialogPassword/DialogPassword";
+import { SocketContext } from "../../context/SocketContext";
+import { UserContext } from "../../context/UserContext";
 
 export const RoomItem = ({ room }) => {
-  console.log(room);
+  const { socket } = useContext(SocketContext);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [openModal, setopenModal] = useState(false);
+  const [players, setplayers] = useState([]);
   const handleModal = () => {
     setopenModal(!openModal);
   };
+
   return (
     <>
       <Card
         className="card-room-item"
         onClick={() => {
-          room.private ? handleModal() : navigate("/room123");
+          socket.emit("join-room", {
+            name: user.name,
+            id: room.identificador,
+          });
+          room.private
+            ? handleModal()
+            : navigate(`/room/${room.identificador}`);
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography component="div" variant="h5">
-              {room.nameRoom}
+              {room.name}
             </Typography>
             <Typography
               variant="subtitle1"

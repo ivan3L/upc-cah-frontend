@@ -11,7 +11,7 @@ export const CardsRouter = () => {
       <div className="container">
         <Routes>
           <Route path="/lobby" element={<Lobby />}></Route>
-          <Route path="/room123" element={<Room/>}></Route>
+          <Route path="/room/:id" element={<Room/>}></Route>
         </Routes>
       </div>
     </>

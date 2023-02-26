@@ -4,30 +4,35 @@ import { RoomList } from "../../components/RoomList/RoomList";
 import "./Lobby.scss";
 import AddIcon from "@mui/icons-material/Add";
 import GroupsIcon from "@mui/icons-material/Groups";
-import io from "socket.io-client";
 import { UserContext } from "../../context/UserContext";
 import { v4 as uuidv4 } from "uuid";
 import { DialogCreateRoom } from "../../components/Dialogs/DialogCreateRoom/DialogCreateRoom";
+import { SocketContext } from "../../context/SocketContext";
 
 export const Lobby = () => {
   const [openModal, setopenModal] = useState(false);
 
   const { user } = useContext(UserContext);
-  const temp = uuidv4();
-  const socket = io("http://localhost:8080");
+  const { socket } = useContext(SocketContext);
 
   const handleModal = () => {
     setopenModal(!openModal);
   };
 
-  const createRoom = () => {
-    socket.emit("crear-room", { namePlayer: user.name, identificador: temp });
-    console.log("ID", temp);
+  const createRoom = (data) => {
+    socket.emit("crear-room", {
+      id: data.id,
+      roomName: data.name,
+      name: user.name,
+      password: data.password,
+      max_number_player: data.max_number_player,
+    });
+    // console.log("ID", temp);
   };
 
   const joinRoom = () => {
     console.log("click");
-    socket.emit("join-room", { roomName: "abc", namePlayer: user.name });
+    // socket.emit("join-room", { roomName: "abc", namePlayer: user.name });
   };
   return (
     <>
@@ -61,7 +66,27 @@ export const Lobby = () => {
           onClose={handleModal}
           className="animate__animated animate__backInDown"
         >
-          <DialogCreateRoom/>
+          <DialogCreateRoom
+            createRoomSocket={(
+              id,
+              name,
+              password,
+              max_number_player,
+              number,
+              owner_id
+            ) => {
+              const data = {
+                id,
+                name,
+                password,
+                max_number_player,
+                number,
+                owner_id,
+              };
+              console.log("data", data);
+              createRoom(data);
+            }}
+          />
         </Dialog>
       </div>
       <div className="container-room">

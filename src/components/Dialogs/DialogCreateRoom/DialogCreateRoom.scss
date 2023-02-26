@@ -1,7 +1,10 @@
-.container-dialog-create-room{
+.container-dialog-create-room {
+    display: flex;
+    flex-wrap: wrap;
     width: 400px;
-    height: 450px;
+
 }
-.form-create-room{
+
+.form-create-room {
     margin: 10px;
 }
