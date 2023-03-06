@@ -1,19 +1,22 @@
 import { Button, Dialog } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { RoomList } from "../../components/RoomList/RoomList";
-import "./Lobby.scss";
 import AddIcon from "@mui/icons-material/Add";
 import GroupsIcon from "@mui/icons-material/Groups";
 import { UserContext } from "../../context/UserContext";
 import { v4 as uuidv4 } from "uuid";
 import { DialogCreateRoom } from "../../components/Dialogs/DialogCreateRoom/DialogCreateRoom";
 import { SocketContext } from "../../context/SocketContext";
+import "./Lobby.scss";
 
 export const Lobby = () => {
   const [openModal, setopenModal] = useState(false);
-
-  const { user } = useContext(UserContext);
   const { socket } = useContext(SocketContext);
+  const { user, setUser } = useContext(UserContext);
+
+  const handleUser = (data) => {
+    setUser(data);
+  };
 
   const handleModal = () => {
     setopenModal(!openModal);
@@ -26,8 +29,8 @@ export const Lobby = () => {
       name: user.name,
       password: data.password,
       max_number_player: data.max_number_player,
+      user: user,
     });
-    // console.log("ID", temp);
   };
 
   const joinRoom = () => {
@@ -83,13 +86,12 @@ export const Lobby = () => {
                 number,
                 owner_id,
               };
-              console.log("data", data);
               createRoom(data);
             }}
           />
         </Dialog>
       </div>
-      <div className="container-room">
+      <div className="container-room-lobby">
         <RoomList />
       </div>
     </>

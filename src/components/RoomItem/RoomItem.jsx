@@ -27,7 +27,7 @@ export const RoomItem = ({ room }) => {
   const handleModal = () => {
     setopenModal(!openModal);
   };
-
+  console.log("user", user);
   return (
     <>
       <Card
@@ -36,6 +36,7 @@ export const RoomItem = ({ room }) => {
           socket.emit("join-room", {
             name: user.name,
             id: room.identificador,
+            user,
           });
           room.private
             ? handleModal()
