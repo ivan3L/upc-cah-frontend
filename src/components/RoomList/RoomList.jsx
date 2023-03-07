@@ -5,23 +5,22 @@ import RoomService from "../../services/Room/roomService";
 import { RoomItem } from "../RoomItem/RoomItem";
 
 export const RoomList = () => {
-  const [rooms, setrooms] = useState([])
+  const [rooms, setrooms] = useState([]);
 
-  useEffect( () => {
-    fetchData()
-  }, [])
-  
-  const fetchData = (async () => {
-    const {data} = await RoomService.getRooms()
-    console.log("data",data)
-    setrooms(data)
-  })
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const { data } = await RoomService.getRooms();
+    setrooms(data);
+  };
 
   return (
     <>
-        {rooms.map((room) => (
-          <RoomItem key={room.id} room={room} />
-        ))}
+      {rooms.map((room) => (
+        <RoomItem key={room.id} room={room} />
+      ))}
     </>
   );
 };

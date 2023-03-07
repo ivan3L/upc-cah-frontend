@@ -24,7 +24,7 @@ export const Lobby = () => {
 
   const createRoom = (data) => {
     socket.emit("crear-room", {
-      id: data.id,
+      idRoom: data.id,
       roomName: data.name,
       name: user.name,
       password: data.password,

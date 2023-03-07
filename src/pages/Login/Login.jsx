@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { LoginSocialGoogle } from "reactjs-social-login";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { UserContext } from "../../context/UserContext";
+import { v4 as uuidv4 } from "uuid";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const idUni = uuidv4();
   const { user, setUser } = useContext(UserContext);
   const handleUser = (data) => {
     setUser(data);
@@ -25,6 +27,7 @@ export const Login = () => {
   const responseGoogle = async (response) => {
     const { data } = response;
     const token = data.access_token;
+    data.id = idUni;
     if (token) {
       handleUser(data);
       localStorage.setItem("user", JSON.stringify(data));

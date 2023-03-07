@@ -17,10 +17,11 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { DialogPassword } from "../../components/Dialogs/DialogPassword/DialogPassword";
 import { SocketContext } from "../../context/SocketContext";
 import { UserContext } from "../../context/UserContext";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 export const RoomItem = ({ room }) => {
   const { socket } = useContext(SocketContext);
-  const { user } = useContext(UserContext);
+  const [user] = useLocalStorage("user");
   const navigate = useNavigate();
   const [openModal, setopenModal] = useState(false);
   const [players, setplayers] = useState([]);
@@ -34,8 +35,7 @@ export const RoomItem = ({ room }) => {
         className="card-room-item"
         onClick={() => {
           socket.emit("join-room", {
-            name: user.name,
-            id: room.identificador,
+            idRoom: room.identificador,
             user,
           });
           room.private

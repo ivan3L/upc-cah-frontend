@@ -12,14 +12,15 @@ import React, { useState } from "react";
 import "./DialogCreateRoom.scss";
 import RoomService from "../../../services/Room/roomService";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 export const DialogCreateRoom = ({ createRoomSocket }) => {
+  const [user] = useLocalStorage("user");
   const navigate = useNavigate();
-  const idUni = uuidv4();
+  console.log("user", user);
 
   const [form, setform] = useState({
-    id: idUni,
+    id: user.id,
     name: "",
     password: "",
     max_number_player: "",
