@@ -7,16 +7,18 @@ import { UserContext } from "../../context/UserContext";
 import { v4 as uuidv4 } from "uuid";
 import { DialogCreateRoom } from "../../components/Dialogs/DialogCreateRoom/DialogCreateRoom";
 import { SocketContext } from "../../context/SocketContext";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import "./Lobby.scss";
 
 export const Lobby = () => {
   const [openModal, setopenModal] = useState(false);
   const { socket } = useContext(SocketContext);
-  const { user, setUser } = useContext(UserContext);
+  const [user] = useLocalStorage("user");
+  const idRoom = uuidv4();
 
-  const handleUser = (data) => {
-    setUser(data);
-  };
+  // const handleUser = (data) => {
+  //   setUser(data);
+  // };
 
   const handleModal = () => {
     setopenModal(!openModal);
@@ -24,7 +26,7 @@ export const Lobby = () => {
 
   const createRoom = (data) => {
     socket.emit("crear-room", {
-      idRoom: data.id,
+      idRoom: idRoom,
       roomName: data.name,
       name: user.name,
       password: data.password,
