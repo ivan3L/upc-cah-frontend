@@ -14,7 +14,7 @@ import RoomService from "../../../services/Room/roomService";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
-export const DialogCreateRoom = ({ createRoomSocket }) => {
+export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
   const [user] = useLocalStorage("user");
   const navigate = useNavigate();
   console.log("user", user);
@@ -43,7 +43,7 @@ export const DialogCreateRoom = ({ createRoomSocket }) => {
       form.max_number_player,
       form.number,
       form.owner_id,
-      form.id
+      idRoom
     );
   };
 
@@ -58,7 +58,7 @@ export const DialogCreateRoom = ({ createRoomSocket }) => {
       form.number,
       form.owner_id
     );
-    navigate(`/room/${form.id}`);
+    navigate(`/room/${idRoom}`);
   };
 
   return (

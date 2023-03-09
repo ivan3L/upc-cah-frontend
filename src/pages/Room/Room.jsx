@@ -3,7 +3,7 @@ import { PlayerSlot } from "../../components/PlayerSlot/PlayerSlot";
 import { SocketContext } from "../../context/SocketContext";
 import { Button } from "@mui/material";
 import "./Room.scss";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 export const Room = ({ match }) => {
@@ -12,6 +12,7 @@ export const Room = ({ match }) => {
   const { socket } = useContext(SocketContext);
   const location = useLocation();
   const url = location.pathname;
+  const navigate = useNavigate();
   const idRoom = url.split("/")[2];
 
   useEffect(() => {
@@ -22,10 +23,12 @@ export const Room = ({ match }) => {
   }, [playersList]);
 
   const leaveRoom = () => {
+    console.log("idRoom", idRoom);
     socket.emit("leave-room", {
       idRoom: idRoom,
       idUser: user.id,
     });
+    navigate("/lobby");
   };
   return (
     <div className="container-room">

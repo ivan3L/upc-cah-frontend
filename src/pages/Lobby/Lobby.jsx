@@ -32,6 +32,7 @@ export const Lobby = () => {
       password: data.password,
       max_number_player: data.max_number_player,
       user: user,
+      owner: true,
     });
   };
 
@@ -93,6 +94,7 @@ export const Lobby = () => {
                 };
                 createRoom(data);
               }}
+              idRoom={idRoom}
             />
           </Dialog>
         </div>

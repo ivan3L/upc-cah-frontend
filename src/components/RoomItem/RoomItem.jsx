@@ -37,6 +37,7 @@ export const RoomItem = ({ room }) => {
           socket.emit("join-room", {
             idRoom: room.identificador,
             user,
+            owner: false,
           });
           room.private
             ? handleModal()

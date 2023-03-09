@@ -3,6 +3,7 @@ import "./PlayerSlot.scss";
 import { Avatar, Typography, Grid } from "@mui/material";
 import imagen from "../../assets/logo.png";
 import { margin } from "@mui/system";
+import StarIcon from "@mui/icons-material/Star";
 
 export const PlayerSlot = ({ player }) => {
   console.log("player", player);
@@ -21,8 +22,14 @@ export const PlayerSlot = ({ player }) => {
       <Grid item>
         <Grid container>
           <Grid item>
-            <Typography variant="subtitle1" color="textPrimary">
-              {player.name}
+            <Typography
+              variant="subtitle1"
+              color="textPrimary"
+              alignItems="center"
+              display={"flex"}
+            >
+              {player.name}{" "}
+              {player.owner && <StarIcon style={{ color: "yellow" }} />}
             </Typography>
           </Grid>
         </Grid>
