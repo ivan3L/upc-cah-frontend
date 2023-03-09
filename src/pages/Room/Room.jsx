@@ -27,7 +27,6 @@ export const Room = ({ match }) => {
       idUser: user.id,
     });
   };
-
   return (
     <div className="container-room">
       <div className="container-slot-player">

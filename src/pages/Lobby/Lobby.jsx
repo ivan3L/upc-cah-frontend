@@ -39,63 +39,67 @@ export const Lobby = () => {
     console.log("click");
     // socket.emit("join-room", { roomName: "abc", namePlayer: user.name });
   };
-  return (
-    <>
-      <div className="container-menu-lobby">
-        <Button
-          className="button-create"
-          sx={{
-            color: "black",
-          }}
-          onClick={joinRoom}
-        >
-          <div>
-            <GroupsIcon sx={{ height: "30px", width: "2em" }} />
-            <p>Join</p>
-          </div>
-        </Button>
-        <Button
-          className="button-create"
-          sx={{
-            color: "black",
-          }}
-          onClick={handleModal}
-        >
-          <div>
-            <AddIcon sx={{ height: "30px", width: "2em" }} />
-            <p>Create</p>
-          </div>
-        </Button>
-        <Dialog
-          open={openModal}
-          onClose={handleModal}
-          className="animate__animated animate__backInDown"
-        >
-          <DialogCreateRoom
-            createRoomSocket={(
-              id,
-              name,
-              password,
-              max_number_player,
-              number,
-              owner_id
-            ) => {
-              const data = {
+  console.log("socket", socket);
+  if (socket) {
+    console.log("socket2", socket);
+    return (
+      <>
+        <div className="container-menu-lobby">
+          <Button
+            className="button-create"
+            sx={{
+              color: "black",
+            }}
+            onClick={joinRoom}
+          >
+            <div>
+              <GroupsIcon sx={{ height: "30px", width: "2em" }} />
+              <p>Join</p>
+            </div>
+          </Button>
+          <Button
+            className="button-create"
+            sx={{
+              color: "black",
+            }}
+            onClick={handleModal}
+          >
+            <div>
+              <AddIcon sx={{ height: "30px", width: "2em" }} />
+              <p>Create</p>
+            </div>
+          </Button>
+          <Dialog
+            open={openModal}
+            onClose={handleModal}
+            className="animate__animated animate__backInDown"
+          >
+            <DialogCreateRoom
+              createRoomSocket={(
                 id,
                 name,
                 password,
                 max_number_player,
                 number,
-                owner_id,
-              };
-              createRoom(data);
-            }}
-          />
-        </Dialog>
-      </div>
-      <div className="container-room-lobby">
-        <RoomList />
-      </div>
-    </>
-  );
+                owner_id
+              ) => {
+                const data = {
+                  id,
+                  name,
+                  password,
+                  max_number_player,
+                  number,
+                  owner_id,
+                };
+                createRoom(data);
+              }}
+            />
+          </Dialog>
+        </div>
+        <div className="container-room-lobby">
+          <RoomList />
+        </div>
+      </>
+    );
+  }
 };
