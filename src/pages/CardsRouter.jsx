@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { NavBar } from "../components/NavBar/NavBar";
 import { Lobby } from "./Lobby/Lobby";
 import { Room } from "./Room/Room";
+import { StartGame } from "./StartGame/StartGame";
 
 export const CardsRouter = () => {
   return (
@@ -12,6 +13,7 @@ export const CardsRouter = () => {
         <Routes>
           <Route path="/lobby" element={<Lobby />}></Route>
           <Route path="/room123" element={<Room/>}></Route>
+          <Route path="/startgame" element={<StartGame/>}></Route>
         </Routes>
       </div>
     </>
