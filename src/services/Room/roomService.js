@@ -9,7 +9,8 @@ const RoomService = {
     max_number_player,
     number,
     owner_id,
-    identificador
+    identificador,
+    rounds
   ) => {
     const body = {
       name,
@@ -18,6 +19,7 @@ const RoomService = {
       number,
       owner_id,
       identificador,
+      rounds,
     };
     const { data } = await axios.post(`${BASE_URL}/room`, body);
     return data;

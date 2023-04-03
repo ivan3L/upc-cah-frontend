@@ -11,7 +11,7 @@ import SendIcon from "@mui/icons-material/Send";
 import React, { useState } from "react";
 import "./DialogCreateRoom.scss";
 import RoomService from "../../../services/Room/roomService";
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
@@ -25,6 +25,7 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
     password: "",
     max_number_player: "",
     number: "1",
+    rounds: 0,
     owner_id: "1",
   });
 
@@ -33,6 +34,7 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
   };
 
   const handleChange = (event) => {
+    console.log("value", event.target.value);
     setform({ ...form, [event.target.name]: event.target.value });
   };
 
@@ -43,7 +45,8 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
       form.max_number_player,
       form.number,
       form.owner_id,
-      idRoom
+      idRoom,
+      form.rounds
     );
   };
 
@@ -58,7 +61,7 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
       form.number,
       form.owner_id
     );
-    navigate(`/room/${idRoom}`);
+    navigate(`/room/${idRoom}`, { state: { rounds: form.rounds } });
   };
 
   return (
@@ -81,8 +84,6 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
               ),
             }}
           />
-        </FormControl>
-        <FormControl>
           <TextField
             id="outlined-size-small"
             size="small"
@@ -97,37 +98,68 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
               ),
             }}
           />
-          <InputLabel
-            variant="standard"
-            htmlFor="uncontrolled-native"
-            style={{ position: "relative", marginLeft: 15 }}
-          >
-            N° de jugadores
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-autowidth-label"
-            id="demo-simple-select-autowidth"
-            value={form.max_number_player}
-            onChange={handleChange}
-            name="max_number_player"
-            label="N° de jugadores"
-            size="small"
-            style={{ width: 150, marginLeft: 10 }}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={1}>1</MenuItem>
-            <MenuItem value={2}>2</MenuItem>
-            <MenuItem value={3}>3</MenuItem>
-            <MenuItem value={4}>4</MenuItem>
-            <MenuItem value={5}>5</MenuItem>
-            <MenuItem value={6}>6</MenuItem>
-            <MenuItem value={7}>7</MenuItem>
-            <MenuItem value={8}>8</MenuItem>
-            <MenuItem value={9}>9</MenuItem>
-            <MenuItem value={10}>10</MenuItem>
-          </Select>
+        </FormControl>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignContent: "center",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <FormControl>
+            <InputLabel
+              variant="standard"
+              htmlFor="uncontrolled-native"
+              style={{ position: "relative" }}
+            >
+              N° de jugadores
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-autowidth-label"
+              id="demo-simple-select-autowidth"
+              value={form.max_number_player}
+              onChange={handleChange}
+              name="max_number_player"
+              label="N° de jugadores"
+              size="small"
+              style={{ width: 150, margin: 2 }}
+            >
+              <MenuItem value={3}>3</MenuItem>
+              <MenuItem value={4}>4</MenuItem>
+              <MenuItem value={5}>5</MenuItem>
+              <MenuItem value={6}>6</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel
+              variant="standard"
+              htmlFor="uncontrolled-native"
+              style={{ position: "relative" }}
+            >
+              N° de rondas
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-autowidth-label"
+              id="demo-simple-select-autowidth"
+              value={form.rounds || ""}
+              onChange={handleChange}
+              name="rounds"
+              label="N° de rondas"
+              size="small"
+              style={{ width: 150, margin: 2 }}
+              required
+            >
+              <MenuItem value={1}>1</MenuItem>
+              <MenuItem value={2}>2</MenuItem>
+              <MenuItem value={3}>3</MenuItem>
+              <MenuItem value={4}>4</MenuItem>
+              <MenuItem value={5}>5</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <FormControl style={{ display: "flex", justifyContent: "center" }}>
           <Button
             onClick={handleClick}
             variant="contained"

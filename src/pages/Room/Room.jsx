@@ -6,8 +6,12 @@ import "./Room.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-export const Room = ({ match }) => {
+export const Room = () => {
   const [playersList, setplayersList] = useState([]);
+  const [newPlayer, setnewPlayer] = useState({
+    name: "",
+    owner: false,
+  });
   const [user] = useLocalStorage("user");
   const { socket } = useContext(SocketContext);
   const location = useLocation();
@@ -16,20 +20,29 @@ export const Room = ({ match }) => {
   const idRoom = url.split("/")[2];
 
   useEffect(() => {
-    socket.on("playersInRoom", (players) => {
-      console.log("Players in the room:", players);
-      setplayersList(players);
+    // console.log("location", location.state.rounds);
+    socket.on("playersInRoom", (data) => {
+      console.log("Players in the room:", data.playersInRoom);
+      console.log("NewPlayer:", data.newPlayer);
+      setplayersList(data.playersInRoom);
+      if (data.newPlayer) {
+        setnewPlayer(data.newPlayer);
+      }
     });
   }, [playersList]);
 
   const leaveRoom = () => {
-    console.log("idRoom", idRoom);
     socket.emit("leave-room", {
       idRoom: idRoom,
       idUser: user.id,
     });
     navigate("/lobby");
   };
+
+  socket.on("moveToStartGame", (id) => {
+    navigate(`/startgame/${id}`);
+  });
+
   return (
     <div className="container-room">
       <div className="container-slot-player">
@@ -38,11 +51,22 @@ export const Room = ({ match }) => {
         ))}
       </div>
       <div className="container-buttons">
-        <Button variant="contained" style={{ margin: 10 }}>
-          Aceptar
-        </Button>
+        {newPlayer.owner && (
+          <Button
+            variant="contained"
+            style={{ margin: 10 }}
+            onClick={() => {
+              socket.emit("start-game", {
+                idRoom: idRoom,
+                rounds: location.state.rounds,
+              });
+            }}
+          >
+            Comenzar
+          </Button>
+        )}
         <Button variant="contained" style={{ margin: 10 }} onClick={leaveRoom}>
-          Volver
+          Regresar
         </Button>
       </div>
     </div>
