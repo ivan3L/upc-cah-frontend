@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Typography } from "@mui/material";
+import logoBlack from '../../assets/logoBlack.png'
 
-export const WhiteCard = () => {
+export const WhiteCard = ({playerCzar, whiteCard}) => {
+  useEffect(() => {
+    console.log("whiteCard123",whiteCard)
+  }, [])
+  
   const [animated, setAnimated] = useState(false);
 
   const handleClick = () => {
@@ -12,7 +17,6 @@ export const WhiteCard = () => {
       console.log(animated);
     }, 1000);
   };
-
   return (
     <div
       className={`card ${animated ? "animate__animated animate__flash" : ""}`}
@@ -33,10 +37,12 @@ export const WhiteCard = () => {
           margin: 1,
         }}
       >
-        <Typography sx={{ padding: 2, wordBreak: "break-word" }}>
-          tu texto aqui
-        </Typography>
+        {playerCzar ? (<img className="logo-navbar" src={logoBlack} />) : (<Typography sx={{ padding: 2, wordBreak: "break-word" }}>
+        {whiteCard.answer}
+      </Typography>) }
+        
       </Card>
+
     </div>
   );
 };

@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import { BlackCard } from "../BlackCard/BlackCard";
 import { WhiteCard } from "../WhiteCard/WhiteCard";
 import "./Game.scss";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { SocketContext } from "../../context/SocketContext";
+import { useGetCard } from "../../hooks/useGetCard";
 
 export const Game = () => {
+  const {cards} = useGetCard()
+  const [deckCards, setDeckCards] = useState([])
+  const [blackCard, setBlackCard] = useState([])
+  const [whiteCard, setWhiteCard] = useState([])
+  const [playerCzar, setPlayerCzar] = useState(false)
+  const [user] = useLocalStorage("user");
+  const { socket } = useContext(SocketContext);
+  socket.on("start-game", (game) => {
+    const {czar} = game
+    if (czar.idUser === user.id){
+      setPlayerCzar(true)
+    }
+  });
+
+  useEffect(() =>{
+    setDeckCards(cards)
+    setBlackCard((prevBlackCard) => {
+      const newBlackCard = cards[0];
+      return newBlackCard;
+    });
+    setWhiteCard((prevWhiteCard) => {
+      const newWhiteCard = cards.slice(1);
+      return newWhiteCard;
+    })
+  },[cards])
+  console.log("whiteCard[0]",whiteCard)
   return (
     <div className="game-container">
       <Typography
@@ -21,12 +50,12 @@ export const Game = () => {
       >
         IPORTENIU IS THE CZAR
       </Typography>
-      <BlackCard />
-      <WhiteCard />
-      <WhiteCard />
-      <WhiteCard />
-      <WhiteCard />
-      <WhiteCard />
+
+      <BlackCard blackCard={blackCard} />
+{whiteCard[0] && whiteCard[0].length > 0 && whiteCard[0].map((card) => {
+  console.log("renderiza", card);
+  return <WhiteCard key={card.id} playerCzar={playerCzar} whiteCard={card}  />
+})}
     </div>
   );
 };

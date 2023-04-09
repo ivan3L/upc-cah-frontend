@@ -34,7 +34,6 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
   };
 
   const handleChange = (event) => {
-    console.log("value", event.target.value);
     setform({ ...form, [event.target.name]: event.target.value });
   };
 

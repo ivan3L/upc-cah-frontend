@@ -28,7 +28,6 @@ export const RoomItem = ({ room }) => {
   const handleModal = () => {
     setopenModal(!openModal);
   };
-  console.log("user", user);
   return (
     <>
       <Card
