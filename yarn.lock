@@ -1070,6 +1070,11 @@
     "filter-obj" "^5.1.0"
     "split-on-first" "^3.0.0"
 
+"react-card-flip@^1.2.0":
+  "integrity" "sha512-5/tbaSBoTTdxV2glail7fr7W7CqNG/4BOm17pNmI1b6TwtRRUrElPdAO4h235MGU2dDwqyWBzO+H8y2Ax6BTpA=="
+  "resolved" "https://registry.npmjs.org/react-card-flip/-/react-card-flip-1.2.0.tgz"
+  "version" "1.2.0"
+
 "react-dom@^16 || ^17 || ^18", "react-dom@^17.0.0 || ^18.0.0", "react-dom@^18.2.0", "react-dom@>=16.6.0", "react-dom@>=16.8":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"

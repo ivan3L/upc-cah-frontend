@@ -22,8 +22,6 @@ export const Room = () => {
   useEffect(() => {
     // console.log("location", location.state.rounds);
     socket.on("playersInRoom", (data) => {
-      console.log("Players in the room:", data.playersInRoom);
-      console.log("NewPlayer:", data.newPlayer);
       setplayersList(data.playersInRoom);
       if (data.newPlayer) {
         setnewPlayer(data.newPlayer);

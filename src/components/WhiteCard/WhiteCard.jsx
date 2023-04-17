@@ -1,28 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Card, Typography } from "@mui/material";
-import logoBlack from '../../assets/logoBlack.png'
+import logoBlack from "../../assets/logoBlack.png";
+import { SocketContext } from "../../context/SocketContext";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { useLocation } from "react-router-dom";
+import CardFlip from "react-card-flip";
+import "./WhiteCards.scss";
 
-export const WhiteCard = ({playerCzar, whiteCard}) => {
-  useEffect(() => {
-    console.log("whiteCard123",whiteCard)
-  }, [])
-  
-  const [animated, setAnimated] = useState(false);
+export const WhiteCard = ({
+  playerCzar,
+  whiteCard,
+  handleCardClick,
+  selectedCard,
+  id,
+}) => {
+  const { socket } = useContext(SocketContext);
+  const [user] = useLocalStorage("user");
+  const location = useLocation();
+  const url = location.pathname;
+  const idRoom = url.split("/")[2];
+  const [czarSelection, setCzarSelection] = useState(false);
 
-  const handleClick = () => {
-    console.log(animated);
-    setAnimated(true);
-    setTimeout(() => {
-      setAnimated(false);
-      console.log(animated);
-    }, 1000);
-  };
+  socket.on("start-czar-answer-selection", (cardsSelection) => {
+    console.log("Czar-selection");
+    setCzarSelection(true);
+  });
+
   return (
     <div
-      className={`card ${animated ? "animate__animated animate__flash" : ""}`}
+      className={`selectable-card ${selectedCard === id ? "selected" : ""} ${
+        czarSelection ? "rotate" : null
+      }`}
     >
       <Card
-        onClick={handleClick}
+        onClick={handleCardClick}
         sx={{
           backgroundColor: "white",
           color: "black",
@@ -37,12 +48,18 @@ export const WhiteCard = ({playerCzar, whiteCard}) => {
           margin: 1,
         }}
       >
-        {playerCzar ? (<img className="logo-navbar" src={logoBlack} />) : (<Typography sx={{ padding: 2, wordBreak: "break-word" }}>
-        {whiteCard.answer}
-      </Typography>) }
-        
+        {playerCzar && !czarSelection ? (
+          <img
+            className="logo-navbar"
+            src={logoBlack}
+            style={{ width: "100%", height: "100%" }}
+          />
+        ) : (
+          <Typography sx={{ padding: 2, wordBreak: "break-word" }}>
+            {whiteCard.answer}
+          </Typography>
+        )}
       </Card>
-
     </div>
   );
 };

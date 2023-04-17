@@ -8,22 +8,25 @@ import { SocketContext } from "../../context/SocketContext";
 import { useGetCard } from "../../hooks/useGetCard";
 
 export const Game = () => {
-  const {cards} = useGetCard()
-  const [deckCards, setDeckCards] = useState([])
-  const [blackCard, setBlackCard] = useState([])
-  const [whiteCard, setWhiteCard] = useState([])
-  const [playerCzar, setPlayerCzar] = useState(false)
+  const { cards } = useGetCard();
+  const [deckCards, setDeckCards] = useState([]);
+  const [blackCard, setBlackCard] = useState([]);
+  const [whiteCard, setWhiteCard] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [playerCzar, setPlayerCzar] = useState(false);
   const [user] = useLocalStorage("user");
   const { socket } = useContext(SocketContext);
+
   socket.on("start-game", (game) => {
-    const {czar} = game
-    if (czar.idUser === user.id){
-      setPlayerCzar(true)
+    const { czar } = game;
+    if (czar.idUser == user.id) {
+      console.log("czar", czar.idUser);
+      setPlayerCzar(true);
     }
   });
 
-  useEffect(() =>{
-    setDeckCards(cards)
+  useEffect(() => {
+    setDeckCards(cards);
     setBlackCard((prevBlackCard) => {
       const newBlackCard = cards[0];
       return newBlackCard;
@@ -31,9 +34,15 @@ export const Game = () => {
     setWhiteCard((prevWhiteCard) => {
       const newWhiteCard = cards.slice(1);
       return newWhiteCard;
-    })
-  },[cards])
-  console.log("whiteCard[0]",whiteCard)
+    });
+  }, [cards]);
+
+  const handleCardClick = (cardId) => {
+    if (!playerCzar) {
+      setSelectedCard(cardId); // Actualiza el estado con el ID de la tarjeta seleccionada
+    }
+  };
+
   return (
     <div className="game-container">
       <Typography
@@ -52,10 +61,20 @@ export const Game = () => {
       </Typography>
 
       <BlackCard blackCard={blackCard} />
-{whiteCard[0] && whiteCard[0].length > 0 && whiteCard[0].map((card) => {
-  console.log("renderiza", card);
-  return <WhiteCard key={card.id} playerCzar={playerCzar} whiteCard={card}  />
-})}
+      {whiteCard[0] &&
+        whiteCard[0].length > 0 &&
+        whiteCard[0].map((card) => {
+          return (
+            <WhiteCard
+              key={card.id}
+              playerCzar={playerCzar}
+              whiteCard={card}
+              handleCardClick={() => handleCardClick(card.id)}
+              selectedCard={selectedCard}
+              id={card.id}
+            />
+          );
+        })}
     </div>
   );
 };
