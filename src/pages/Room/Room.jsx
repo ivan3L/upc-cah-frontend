@@ -5,8 +5,13 @@ import { Button } from "@mui/material";
 import "./Room.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { useGeBlackCard } from "../../hooks/useGetBlackCard";
+import { useGeWhiteCard } from "../../hooks/useGetWhiteCard";
 
 export const Room = () => {
+  const { blackCards } = useGeBlackCard();
+  const { whiteCards } = useGeWhiteCard();
+
   const [playersList, setplayersList] = useState([]);
   const [newPlayer, setnewPlayer] = useState({
     name: "",
@@ -54,9 +59,15 @@ export const Room = () => {
             variant="contained"
             style={{ margin: 10 }}
             onClick={() => {
+              console.log("idRoom", idRoom);
+              console.log("rounds", location.state.rounds);
+              console.log("blackCards", blackCards);
+              console.log("whiteCards", whiteCards);
               socket.emit("start-game", {
                 idRoom: idRoom,
                 rounds: location.state.rounds,
+                blackCards: blackCards,
+                whiteCards: whiteCards,
               });
             }}
           >

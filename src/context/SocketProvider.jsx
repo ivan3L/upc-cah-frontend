@@ -7,7 +7,6 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     const newSocket = io("http://localhost:8080");
-    console.log("newSocket1", newSocket);
     setsocket(newSocket);
   }, []);
 

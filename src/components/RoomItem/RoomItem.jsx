@@ -33,7 +33,6 @@ export const RoomItem = ({ room }) => {
       <Card
         className="card-room-item"
         onClick={() => {
-          console.log("identificador", room);
           socket.emit("join-room", {
             idRoom: room.identificador,
             user,

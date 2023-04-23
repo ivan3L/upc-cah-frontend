@@ -6,7 +6,6 @@ import { margin } from "@mui/system";
 import StarIcon from "@mui/icons-material/Star";
 
 export const PlayerSlot = ({ player }) => {
-  console.log("player", player);
   return (
     <Grid
       container

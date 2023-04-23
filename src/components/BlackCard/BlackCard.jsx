@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { Card, Typography } from "@mui/material";
 
-export const BlackCard = ({blackCard}) => {
-  console.log("blackCard",blackCard)
-  
+export const BlackCard = ({ blackCard }) => {
   return (
     <div
       style={{
@@ -14,23 +12,24 @@ export const BlackCard = ({blackCard}) => {
       }}
     >
       {blackCard && blackCard[0] && blackCard[0].question ? (
-      <Card
-        sx={{
-          backgroundColor: "black",
-          color: "white",
-          height: 225,
-          width: 175,
-          borderRadius: 5,
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          alignContent: "center",
-        }}
-      >
-        <Typography sx={{ padding: 2, wordBreak: "break-word" }}>
-          {blackCard[0].question}
-        </Typography>
-      </Card>): null }
+        <Card
+          sx={{
+            backgroundColor: "black",
+            color: "white",
+            height: 225,
+            width: 175,
+            borderRadius: 5,
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          <Typography sx={{ padding: 2, wordBreak: "break-word" }}>
+            {blackCard[0].question}
+          </Typography>
+        </Card>
+      ) : null}
     </div>
   );
 };

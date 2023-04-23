@@ -37,12 +37,9 @@ export const Lobby = () => {
   };
 
   const joinRoom = () => {
-    console.log("click");
     // socket.emit("join-room", { roomName: "abc", namePlayer: user.name });
   };
-  console.log("socket", socket);
   if (socket) {
-    console.log("socket2", socket);
     return (
       <>
         <div className="container-menu-lobby">

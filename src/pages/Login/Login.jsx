@@ -50,9 +50,7 @@ export const Login = () => {
         <LoginSocialGoogle
           client_id="796613161165-8viuck8dada3igblrniqb8qipp0nmdk1.apps.googleusercontent.com"
           onResolve={responseGoogle}
-          onReject={(error) => {
-            console.log("error", error);
-          }}
+          onReject={(error) => {}}
         >
           <GoogleLoginButton />
         </LoginSocialGoogle>

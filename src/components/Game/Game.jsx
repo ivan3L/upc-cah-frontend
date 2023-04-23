@@ -5,10 +5,10 @@ import { WhiteCard } from "../WhiteCard/WhiteCard";
 import "./Game.scss";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { SocketContext } from "../../context/SocketContext";
-import { useGetCard } from "../../hooks/useGetCard";
+// import { useGetCard } from "../../hooks/useGetBlackCard";
 
 export const Game = () => {
-  const { cards } = useGetCard();
+  // const { cards } = useGetCard();
   const [deckCards, setDeckCards] = useState([]);
   const [blackCard, setBlackCard] = useState([]);
   const [whiteCard, setWhiteCard] = useState([]);
@@ -16,13 +16,19 @@ export const Game = () => {
   const [playerCzar, setPlayerCzar] = useState(false);
   const [user] = useLocalStorage("user");
   const { socket } = useContext(SocketContext);
+  const [czarSelection, setCzarSelection] = useState(false);
+  const [Pzar, setPzar] = useState({});
 
   socket.on("start-game", (game) => {
     const { czar } = game;
+    setPzar(czar);
     if (czar.idUser == user.id) {
-      console.log("czar", czar.idUser);
       setPlayerCzar(true);
     }
+  });
+
+  socket.on("start-czar-answer-selection", (cardsSelection) => {
+    setCzarSelection(true);
   });
 
   useEffect(() => {
@@ -32,17 +38,31 @@ export const Game = () => {
       return newBlackCard;
     });
     setWhiteCard((prevWhiteCard) => {
-      const newWhiteCard = cards.slice(1);
+      console.log("cards", cards);
+      const WhiteCard = cards.slice(1);
+      if (WhiteCard.length > 0) {
+        console.log("WhiteCard", WhiteCard);
+        const indexCardIsCorrect = WhiteCard[0].findIndex(
+          (card) => card.is_correct == true
+        );
+        const CardCorrect = WhiteCard[0][indexCardIsCorrect];
+        WhiteCard[0].splice(indexCardIsCorrect, 1);
+      }
+      const newWhiteCard = WhiteCard;
+      console.log("newWhiteCard", newWhiteCard);
       return newWhiteCard;
     });
   }, [cards]);
 
   const handleCardClick = (cardId) => {
-    if (!playerCzar) {
+    if (!playerCzar && !czarSelection) {
       setSelectedCard(cardId); // Actualiza el estado con el ID de la tarjeta seleccionada
+    } else if (playerCzar && czarSelection) {
+      setSelectedCard(cardId);
     }
   };
 
+  console.log("Pzar", Pzar);
   return (
     <div className="game-container">
       <Typography
@@ -57,7 +77,7 @@ export const Game = () => {
           textAlign: "center",
         }}
       >
-        IPORTENIU IS THE CZAR
+        {Pzar && `${Pzar.name} is czar`}
       </Typography>
 
       <BlackCard blackCard={blackCard} />
@@ -71,6 +91,7 @@ export const Game = () => {
               whiteCard={card}
               handleCardClick={() => handleCardClick(card.id)}
               selectedCard={selectedCard}
+              czarSelection={czarSelection}
               id={card.id}
             />
           );

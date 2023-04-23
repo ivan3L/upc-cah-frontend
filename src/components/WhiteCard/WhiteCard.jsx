@@ -12,6 +12,7 @@ export const WhiteCard = ({
   whiteCard,
   handleCardClick,
   selectedCard,
+  czarSelection,
   id,
 }) => {
   const { socket } = useContext(SocketContext);
@@ -19,12 +20,6 @@ export const WhiteCard = ({
   const location = useLocation();
   const url = location.pathname;
   const idRoom = url.split("/")[2];
-  const [czarSelection, setCzarSelection] = useState(false);
-
-  socket.on("start-czar-answer-selection", (cardsSelection) => {
-    console.log("Czar-selection");
-    setCzarSelection(true);
-  });
 
   return (
     <div

@@ -17,7 +17,6 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
   const [user] = useLocalStorage("user");
   const navigate = useNavigate();
-  console.log("user", user);
 
   const [form, setform] = useState({
     id: user.id,
