@@ -8,9 +8,8 @@ import { SocketContext } from "../../context/SocketContext";
 // import { useGetCard } from "../../hooks/useGetBlackCard";
 
 export const Game = () => {
-  // const { cards } = useGetCard();
-  const [deckCards, setDeckCards] = useState([]);
-  const [blackCard, setBlackCard] = useState([]);
+  const [correctCard, setCorrectCard] = useState("");
+  const [blackCard, setBlackCard] = useState("");
   const [whiteCard, setWhiteCard] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [playerCzar, setPlayerCzar] = useState(false);
@@ -20,6 +19,10 @@ export const Game = () => {
   const [Pzar, setPzar] = useState({});
 
   socket.on("start-game", (game) => {
+    console.log("STARTT-GAME", game);
+    setBlackCard(game.currentBlackCard);
+    setWhiteCard(game.currentWhiteCards);
+    setCorrectCard(game.currentCorrectWhiteCard);
     const { czar } = game;
     setPzar(czar);
     if (czar.idUser == user.id) {
@@ -31,29 +34,6 @@ export const Game = () => {
     setCzarSelection(true);
   });
 
-  useEffect(() => {
-    setDeckCards(cards);
-    setBlackCard((prevBlackCard) => {
-      const newBlackCard = cards[0];
-      return newBlackCard;
-    });
-    setWhiteCard((prevWhiteCard) => {
-      console.log("cards", cards);
-      const WhiteCard = cards.slice(1);
-      if (WhiteCard.length > 0) {
-        console.log("WhiteCard", WhiteCard);
-        const indexCardIsCorrect = WhiteCard[0].findIndex(
-          (card) => card.is_correct == true
-        );
-        const CardCorrect = WhiteCard[0][indexCardIsCorrect];
-        WhiteCard[0].splice(indexCardIsCorrect, 1);
-      }
-      const newWhiteCard = WhiteCard;
-      console.log("newWhiteCard", newWhiteCard);
-      return newWhiteCard;
-    });
-  }, [cards]);
-
   const handleCardClick = (cardId) => {
     if (!playerCzar && !czarSelection) {
       setSelectedCard(cardId); // Actualiza el estado con el ID de la tarjeta seleccionada
@@ -62,7 +42,7 @@ export const Game = () => {
     }
   };
 
-  console.log("Pzar", Pzar);
+  console.log("whiteCard", whiteCard);
   return (
     <div className="game-container">
       <Typography
@@ -81,9 +61,9 @@ export const Game = () => {
       </Typography>
 
       <BlackCard blackCard={blackCard} />
-      {whiteCard[0] &&
-        whiteCard[0].length > 0 &&
-        whiteCard[0].map((card) => {
+      {whiteCard &&
+        whiteCard.length > 0 &&
+        whiteCard.map((card) => {
           return (
             <WhiteCard
               key={card.id}

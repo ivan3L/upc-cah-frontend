@@ -6,14 +6,18 @@ import { Counter } from "../../components/Counter/Counter";
 export const StartGame = () => {
   return (
     <>
-      <Grid container spacing={2}>
-        <Grid item xs={1}>
+      <Grid container spacing={2} style={{ height: "90VH" }}>
+        <Grid item xs={2}>
           <div className="list-players">LIST PLAYERS</div>
         </Grid>
-        <Grid item xs={10}>
+        <Grid
+          item
+          xs={8}
+          style={{ height: "100%", display: "flex", alignContent: "center" }}
+        >
           <Game />
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={2}>
           <Counter />
         </Grid>
       </Grid>
