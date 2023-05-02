@@ -22,6 +22,11 @@ export const Game = () => {
   const location = useLocation();
   const url = location.pathname;
   const idRoom = url.split("/")[2];
+  const [showCorrectCard, setShowCorrectCard] = useState(false);
+
+  useEffect(() => {
+    console.log("showCorrectCard", showCorrectCard);
+  }, [showCorrectCard]);
 
   socket.on("start-game", (game) => {
     console.log("game", game);
@@ -40,9 +45,15 @@ export const Game = () => {
     setSelectedCards(selections);
   });
 
+  socket.on("end-czar-answer-selection", () => {
+    console.log("end-seleccion-czar");
+    setShowCorrectCard(true);
+  });
+
   const handleCardClick = (card) => {
     console.log(card);
     if (!playerCzar && !czarSelection) {
+      //cuando eligen los jugadores
       setSelectedCard(card.id);
       socket.emit("answer-selection", {
         userId: user.id,
@@ -51,7 +62,13 @@ export const Game = () => {
       });
       // Actualiza el estado con el ID de la tarjeta seleccionada
     } else if (playerCzar && czarSelection) {
+      //Cuado elige el czar
       setSelectedCard(card.id);
+      socket.emit("czar-answer-selection", {
+        userId: user.id,
+        idRoom: idRoom,
+        whiteCard: card,
+      });
     }
   };
 
@@ -83,6 +100,8 @@ export const Game = () => {
                 handleCardClick={() => handleCardClick(card)}
                 selectedCard={selectedCard}
                 czarSelection={czarSelection}
+                showCorrectCard={showCorrectCard}
+                correct={card.is_correct}
                 id={card.id}
               />
             ))
@@ -96,7 +115,7 @@ export const Game = () => {
               whiteCard={card}
               handleCardClick={() => handleCardClick(card)}
               selectedCard={selectedCard}
-              czarSelection={czarSelection}
+              showCorrectCard={showCorrectCard}
               id={card.id}
             />
           ))}

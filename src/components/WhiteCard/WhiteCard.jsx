@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
-import { Card, Typography } from "@mui/material";
+import { Card, Typography, CardActions, IconButton } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
 import logoBlack from "../../assets/logoBlack.png";
 import { SocketContext } from "../../context/SocketContext";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -13,9 +15,12 @@ export const WhiteCard = ({
   handleCardClick,
   selectedCard,
   czarSelection,
+  showCorrectCard,
+  correct,
   id,
 }) => {
-  console.log("czarSelection",czarSelection)
+  console.log("czarSelection-WH", czarSelection);
+  console.log("showCorrectCard-WH", showCorrectCard);
   const { socket } = useContext(SocketContext);
   const [user] = useLocalStorage("user");
   const location = useLocation();
@@ -27,11 +32,13 @@ export const WhiteCard = ({
       className={`selectable-card ${selectedCard === id ? "selected" : ""} ${
         czarSelection ? "rotate" : null
       }`}
+      style={{ height: 245 }}
     >
       <Card
         onClick={() => {
-          console.log("click")
-          handleCardClick(whiteCard)}}
+          console.log("click");
+          handleCardClick(whiteCard);
+        }}
         sx={{
           backgroundColor: "white",
           color: "black",
@@ -57,6 +64,20 @@ export const WhiteCard = ({
             {whiteCard.answer}
           </Typography>
         )}
+        {
+          playerCzar && showCorrectCard && correct ? (
+            <CardActions>
+              <IconButton style={{ marginLeft: "auto", color: "black" }}>
+                <CheckIcon sx={{ color: "black" }} />
+              </IconButton>
+            </CardActions>
+          ) : null
+          // <CardActions>
+          //   <IconButton style={{ marginLeft: "auto", color: "black" }}>
+          //     <CloseIcon sx={{ color: "black" }} />
+          //   </IconButton>
+          // </CardActions>
+        }
       </Card>
     </div>
   );

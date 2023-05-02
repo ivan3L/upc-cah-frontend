@@ -13,7 +13,12 @@ export const StartGame = () => {
         <Grid
           item
           xs={8}
-          style={{ height: "100%", display: "flex", alignContent: "center" }}
+          style={{
+            height: "100%",
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "center",
+          }}
         >
           <Game />
         </Grid>
