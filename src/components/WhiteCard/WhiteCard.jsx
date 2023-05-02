@@ -15,6 +15,7 @@ export const WhiteCard = ({
   czarSelection,
   id,
 }) => {
+  console.log("czarSelection",czarSelection)
   const { socket } = useContext(SocketContext);
   const [user] = useLocalStorage("user");
   const location = useLocation();
@@ -28,7 +29,9 @@ export const WhiteCard = ({
       }`}
     >
       <Card
-        onClick={handleCardClick}
+        onClick={() => {
+          console.log("click")
+          handleCardClick(whiteCard)}}
         sx={{
           backgroundColor: "white",
           color: "black",

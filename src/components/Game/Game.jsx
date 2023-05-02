@@ -4,6 +4,7 @@ import { BlackCard } from "../BlackCard/BlackCard";
 import { WhiteCard } from "../WhiteCard/WhiteCard";
 import "./Game.scss";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { useLocation } from "react-router-dom";
 import { SocketContext } from "../../context/SocketContext";
 // import { useGetCard } from "../../hooks/useGetBlackCard";
 
@@ -17,9 +18,11 @@ export const Game = () => {
   const { socket } = useContext(SocketContext);
   const [czarSelection, setCzarSelection] = useState(false);
   const [Pzar, setPzar] = useState({});
+  const location = useLocation();
+  const url = location.pathname;
+  const idRoom = url.split("/")[2];
 
   socket.on("start-game", (game) => {
-    console.log("STARTT-GAME", game);
     setBlackCard(game.currentBlackCard);
     setWhiteCard(game.currentWhiteCards);
     setCorrectCard(game.currentCorrectWhiteCard);
@@ -34,11 +37,14 @@ export const Game = () => {
     setCzarSelection(true);
   });
 
-  const handleCardClick = (cardId) => {
+  const handleCardClick = (card) => {
+    console.log(card)
     if (!playerCzar && !czarSelection) {
-      setSelectedCard(cardId); // Actualiza el estado con el ID de la tarjeta seleccionada
+      setSelectedCard(card.id);
+      socket.emit('answer-selection', {userId: user.id, idRoom: idRoom, whiteCard: card})
+      // Actualiza el estado con el ID de la tarjeta seleccionada
     } else if (playerCzar && czarSelection) {
-      setSelectedCard(cardId);
+      setSelectedCard(card.id);
     }
   };
 
@@ -69,7 +75,7 @@ export const Game = () => {
               key={card.id}
               playerCzar={playerCzar}
               whiteCard={card}
-              handleCardClick={() => handleCardClick(card.id)}
+              handleCardClick={() => handleCardClick(card)}
               selectedCard={selectedCard}
               czarSelection={czarSelection}
               id={card.id}
