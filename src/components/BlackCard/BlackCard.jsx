@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Card, Typography } from "@mui/material";
 
 export const BlackCard = ({ blackCard }) => {
+  console.log("blackCard", blackCard);
   return (
     <div
       style={{
@@ -11,7 +12,7 @@ export const BlackCard = ({ blackCard }) => {
         marginBlock: 20,
       }}
     >
-      {blackCard && blackCard[0] && blackCard[0].question ? (
+      {blackCard && blackCard.question ? (
         <Card
           sx={{
             backgroundColor: "black",
@@ -26,7 +27,7 @@ export const BlackCard = ({ blackCard }) => {
           }}
         >
           <Typography sx={{ padding: 2, wordBreak: "break-word" }}>
-            {blackCard[0].question}
+            {blackCard.question}
           </Typography>
         </Card>
       ) : null}
