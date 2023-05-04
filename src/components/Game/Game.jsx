@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 import { SocketContext } from "../../context/SocketContext";
 // import { useGetCard } from "../../hooks/useGetBlackCard";
 
-export const Game = () => {
+export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
   const [correctCard, setCorrectCard] = useState({});
   const [selectedCards, setSelectedCards] = useState([]); //Todas las cartas que eligen los jugadores + la verdadera
   const [blackCard, setBlackCard] = useState({});
@@ -16,17 +16,18 @@ export const Game = () => {
   const [selectedCard, setSelectedCard] = useState(null); //Carta que elige 1 jugador
   const [playerCzar, setPlayerCzar] = useState(false);
   const [user] = useLocalStorage("user");
-  const { socket } = useContext(SocketContext);
   const [czarSelection, setCzarSelection] = useState(false);
   const [Pzar, setPzar] = useState({});
   const location = useLocation();
   const url = location.pathname;
   const idRoom = url.split("/")[2];
-  const [showCorrectCard, setShowCorrectCard] = useState(false);
 
   useEffect(() => {
-    console.log("showCorrectCard", showCorrectCard);
-  }, [showCorrectCard]);
+    if (resetGame) {
+      setCzarSelection(false);
+      socket.emit("start-game", { idRoom: idRoom });
+    }
+  }, [resetGame]);
 
   socket.on("start-game", (game) => {
     console.log("game", game);
@@ -43,11 +44,6 @@ export const Game = () => {
   socket.on("start-czar-answer-selection", (selections) => {
     setCzarSelection(true);
     setSelectedCards(selections);
-  });
-
-  socket.on("end-czar-answer-selection", () => {
-    console.log("end-seleccion-czar");
-    setShowCorrectCard(true);
   });
 
   const handleCardClick = (card) => {

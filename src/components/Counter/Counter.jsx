@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const Counter = () => {
+export const Counter = ({ showCorrectCard }) => {
   const [count, setCount] = useState(30);
 
   useEffect(() => {
