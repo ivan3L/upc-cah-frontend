@@ -13,6 +13,7 @@ export const StartGame = () => {
     console.log("end-czar");
     setShowCorrectCard(true);
     setTimeout(() => {
+      console.log("RESET-5SEG");
       setShowCorrectCard(false);
       setResetGame(true);
     }, 5000);

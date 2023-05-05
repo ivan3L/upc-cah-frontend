@@ -23,14 +23,21 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
   const idRoom = url.split("/")[2];
 
   useEffect(() => {
-    if (resetGame) {
-      setCzarSelection(false);
+    console.log("resetGame", resetGame);
+    console.log("playerCzar", playerCzar);
+    if (resetGame && playerCzar) {
+      console.log("EMITE");
+      setSelectedCards([]);
       socket.emit("start-game", { idRoom: idRoom });
+      setResetGame(false);
+    }
+    if (resetGame) {
+      setPlayerCzar(false);
+      setCzarSelection(false);
     }
   }, [resetGame]);
 
   socket.on("start-game", (game) => {
-    console.log("game", game);
     setBlackCard(game.currentBlackCard);
     setWhiteCard(game.currentWhiteCards);
     setCorrectCard(game.currentCorrectWhiteCard);
@@ -67,7 +74,7 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
       });
     }
   };
-
+  console.log("PZAR", Pzar);
   return (
     <div className="game-container">
       <Typography
@@ -111,6 +118,7 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
               whiteCard={card}
               handleCardClick={() => handleCardClick(card)}
               selectedCard={selectedCard}
+              czarSelection={czarSelection}
               showCorrectCard={showCorrectCard}
               id={card.id}
             />

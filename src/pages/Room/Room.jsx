@@ -59,10 +59,7 @@ export const Room = () => {
             variant="contained"
             style={{ margin: 10 }}
             onClick={() => {
-              console.log("idRoom", idRoom);
-              console.log("rounds", location.state.rounds);
-              console.log("blackCards", blackCards);
-              console.log("whiteCards", whiteCards);
+              console.log("EMITE-CLICK");
               socket.emit("start-game", {
                 idRoom: idRoom,
                 rounds: location.state.rounds,

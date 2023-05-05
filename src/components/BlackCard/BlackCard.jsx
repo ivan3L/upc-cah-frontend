@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Card, Typography } from "@mui/material";
 
 export const BlackCard = ({ blackCard }) => {
-  console.log("blackCard", blackCard);
   return (
     <div
       style={{

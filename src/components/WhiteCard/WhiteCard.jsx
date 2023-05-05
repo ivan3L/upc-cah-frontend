@@ -19,8 +19,6 @@ export const WhiteCard = ({
   correct,
   id,
 }) => {
-  console.log("czarSelection-WH", czarSelection);
-  console.log("showCorrectCard-WH", showCorrectCard);
   const { socket } = useContext(SocketContext);
   const [user] = useLocalStorage("user");
   const location = useLocation();

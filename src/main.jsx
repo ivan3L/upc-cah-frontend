@@ -7,7 +7,7 @@ import { SocketProvider } from "./context/SocketProvider.jsx";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  // <React.StrictMode>
   <SocketProvider>
     <UserProvider>
       <BrowserRouter>
@@ -15,5 +15,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </BrowserRouter>
     </UserProvider>
   </SocketProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
