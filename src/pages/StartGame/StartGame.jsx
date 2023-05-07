@@ -11,9 +11,9 @@ export const StartGame = () => {
   const [resetGame, setResetGame] = useState(false);
 
   socket.on("reset-game", () => {
-    console.log("reset-game-setimeout")
-      setResetGame(true);
-      setShowCorrectCard(false);
+    console.log("reset-game-setimeout");
+    setResetGame(true);
+    setShowCorrectCard(false);
   });
 
   socket.on("end-czar-answer-selection", () => {
@@ -48,7 +48,16 @@ export const StartGame = () => {
               setResetGame={setResetGame}
             />
           </Grid>
-          <Grid item xs={2} style={{ padding: "10px" }}>
+          <Grid
+            item
+            xs={2}
+            style={{
+              padding: "10px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+            }}
+          >
             {!showCorrectCard ? <Counter /> : null}
           </Grid>
         </Grid>

@@ -1,0 +1,18 @@
+.counter-container {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 70px;
+    border-radius: 10px;
+    transform: perspective(80px) rotateX(10deg);
+  }
+  
+  
+  .counter-text {
+    color: white;
+    font-family: "Axiforma Heavy", sans-serif;
+    font-size: 40px;
+  }
+  

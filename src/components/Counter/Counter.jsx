@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./Counter.scss";
 
 export const Counter = ({ showCorrectCard }) => {
   const [count, setCount] = useState(30);
@@ -10,5 +11,9 @@ export const Counter = ({ showCorrectCard }) => {
     return () => clearInterval(interval);
   }, []);
 
-  return <h1>{count}</h1>;
+  return (
+    <div className="counter-container">
+      <h1 className="counter-text">{count}</h1>
+    </div>
+  );
 };
