@@ -10,12 +10,10 @@ export const StartGame = () => {
   const [resetGame, setResetGame] = useState(false);
 
   socket.on("end-czar-answer-selection", () => {
-    console.log("end-czar");
     setShowCorrectCard(true);
     setTimeout(() => {
-      console.log("RESET-5SEG");
       setShowCorrectCard(false);
-      setResetGame(!resetGame);
+      setResetGame(true);
     }, 5000);
   });
 

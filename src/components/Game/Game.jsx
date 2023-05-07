@@ -22,26 +22,37 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
   const url = location.pathname;
   const idRoom = url.split("/")[2];
 
+  
+
   useEffect(() => {
-    if (resetGame && playerCzar) {
-      socket.emit("start-game", { idRoom: idRoom });
-    }
     if (resetGame) {
+      console.log("reset-game-true")
+      console.log("flag-czar-empieza-como", playerCzar)
       setSelectedCards([]);
       setSelectedCard(null);
-      setResetGame(!resetGame);
-      setPlayerCzar(false);
       setCzarSelection(false);
+      setResetGame(false);
+      console.log("player",playerCzar)
+      if (playerCzar) {
+        console.log("RESETGAME2")
+        setPlayerCzar(!playerCzar);
+        socket.emit("start-game", { idRoom: idRoom });
+
+      }
     }
-    console.log("resetGame", resetGame);
-    console.log("playerCzar", playerCzar);
   }, [resetGame]);
 
   socket.on("start-game", (game) => {
+    console.log("START-GAME3",resetGame)
     setBlackCard(game.currentBlackCard);
     setWhiteCard(game.currentWhiteCards);
     setCorrectCard(game.currentCorrectWhiteCard);
     const { czar } = game;
+    console.log("czar",czar)
+    console.log("NAVEGADOR",user)
+
+    //CZAR 
+    //USUARIO
     setPzar(czar);
     if (czar.idUser == user.id) {
       setPlayerCzar(true);
@@ -49,6 +60,7 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
   });
 
   socket.on("start-czar-answer-selection", (selections) => {
+    console.log("SELECTIONS",selections)
     setCzarSelection(true);
     setSelectedCards(selections);
   });
@@ -74,7 +86,8 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
       });
     }
   };
-  console.log("PZAR", Pzar);
+  console.log("player2",playerCzar)
+
   return (
     <div className="game-container">
       <Typography

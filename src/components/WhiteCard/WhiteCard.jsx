@@ -24,7 +24,6 @@ export const WhiteCard = ({
   const location = useLocation();
   const url = location.pathname;
   const idRoom = url.split("/")[2];
-
   return (
     <div
       className={`selectable-card ${selectedCard === id ? "selected" : ""} ${
