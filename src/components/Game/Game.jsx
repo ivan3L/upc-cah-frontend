@@ -23,18 +23,18 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
   const idRoom = url.split("/")[2];
 
   useEffect(() => {
-    console.log("resetGame", resetGame);
-    console.log("playerCzar", playerCzar);
     if (resetGame && playerCzar) {
-      console.log("EMITE");
-      setSelectedCards([]);
       socket.emit("start-game", { idRoom: idRoom });
-      setResetGame(false);
     }
     if (resetGame) {
+      setSelectedCards([]);
+      setSelectedCard(null);
+      setResetGame(!resetGame);
       setPlayerCzar(false);
       setCzarSelection(false);
     }
+    console.log("resetGame", resetGame);
+    console.log("playerCzar", playerCzar);
   }, [resetGame]);
 
   socket.on("start-game", (game) => {

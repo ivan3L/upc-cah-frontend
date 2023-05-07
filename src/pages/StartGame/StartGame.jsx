@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import { Game } from "../../components/Game/Game";
 import { Counter } from "../../components/Counter/Counter";
@@ -15,7 +15,7 @@ export const StartGame = () => {
     setTimeout(() => {
       console.log("RESET-5SEG");
       setShowCorrectCard(false);
-      setResetGame(true);
+      setResetGame(!resetGame);
     }, 5000);
   });
 
