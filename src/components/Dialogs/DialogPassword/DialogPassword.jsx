@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Typography, Grid } from "@mui/material";
 import "./DialogPassword.scss";
-import cards from '../../assets/img123.gif'
+import cards from '../../../assets/img123.gif'
 
 export const DialogPassword = ({room}) => {
   return (

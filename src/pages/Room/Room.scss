@@ -1,5 +1,17 @@
+.container-room{
+    display: flex;
+    min-height: 90vh;
+    flex-direction: column;
+}
+
 .container-slot-player{
     display: grid;
     grid-template-columns: 33% 33% 33%;
     margin: 20px;
+}
+
+.container-buttons{
+    display: flex;
+    margin-top: auto;
+    justify-content: center;
 }

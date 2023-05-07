@@ -1,15 +1,26 @@
 import { handleBreakpoints } from "@mui/system";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getRooms } from "../../api/getRooms";
+import RoomService from "../../services/Room/roomService";
 import { RoomItem } from "../RoomItem/RoomItem";
 
 export const RoomList = () => {
-  const rooms = getRooms();
+  const [rooms, setrooms] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const { data } = await RoomService.getRooms();
+    setrooms(data);
+  };
+
   return (
     <>
-        {rooms.map((room) => (
-          <RoomItem key={room.id} room={room} />
-        ))}
+      {rooms.map((room) => (
+        <RoomItem key={room.id} room={room} />
+      ))}
     </>
   );
 };

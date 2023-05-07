@@ -1,73 +1,104 @@
 import { Button, Dialog } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { RoomList } from "../../components/RoomList/RoomList";
-import "./Lobby.scss";
 import AddIcon from "@mui/icons-material/Add";
 import GroupsIcon from "@mui/icons-material/Groups";
-import { getWebSocket } from "../../services/websocket/websocket";
-import io from "socket.io-client";
 import { UserContext } from "../../context/UserContext";
 import { v4 as uuidv4 } from "uuid";
-// import { DialogCreateRoom } from "../../components/Dialog/DialogCreateRoom/DialogCreateRoom";
+import { DialogCreateRoom } from "../../components/Dialogs/DialogCreateRoom/DialogCreateRoom";
+import { SocketContext } from "../../context/SocketContext";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import "./Lobby.scss";
 
 export const Lobby = () => {
   const [openModal, setopenModal] = useState(false);
+  const { socket } = useContext(SocketContext);
+  const [user] = useLocalStorage("user");
+  const idRoom = uuidv4();
 
-  const { user } = useContext(UserContext);
-  const temp = uuidv4();
-  const socket = io("http://localhost:8080");
+  // const handleUser = (data) => {
+  //   setUser(data);
+  // };
 
   const handleModal = () => {
     setopenModal(!openModal);
   };
 
-  const createRoom = () => {
-    socket.emit("crear-room", { namePlayer: user.name, identificador: temp });
-    console.log("ID", temp);
+  const createRoom = (data) => {
+    socket.emit("crear-room", {
+      idRoom: idRoom,
+      roomName: data.name,
+      name: user.name,
+      password: data.password,
+      max_number_player: data.max_number_player,
+      user: user,
+      owner: true,
+    });
   };
 
   const joinRoom = () => {
-    console.log("click");
-    socket.emit("join-room", { roomName: "abc", namePlayer: user.name });
+    // socket.emit("join-room", { roomName: "abc", namePlayer: user.name });
   };
-  return (
-    <>
-      <div className="container-menu-lobby">
-        <Button
-          className="button-create"
-          sx={{
-            color: "black",
-          }}
-          onClick={joinRoom}
-        >
-          <div>
-            <GroupsIcon sx={{ height: "30px", width: "2em" }} />
-            <p>Join</p>
-          </div>
-        </Button>
-        <Button
-          className="button-create"
-          sx={{
-            color: "black",
-          }}
-          onClick={createRoom}
-        >
-          <div>
-            <AddIcon sx={{ height: "30px", width: "2em" }} />
-            <p>Create</p>
-          </div>
-        </Button>
-        {/* <Dialog
-          open={openModal}
-          onClose={handleModal}
-          className="animate__animated animate__backInDown"
-        >
-          <DialogCreateRoom/>
-        </Dialog> */}
-      </div>
-      <div className="container-room">
-        <RoomList />
-      </div>
-    </>
-  );
+  if (socket) {
+    return (
+      <>
+        <div className="container-menu-lobby">
+          <Button
+            className="button-create"
+            sx={{
+              color: "black",
+            }}
+            onClick={joinRoom}
+          >
+            <div>
+              <GroupsIcon sx={{ height: "30px", width: "2em" }} />
+              <p>Join</p>
+            </div>
+          </Button>
+          <Button
+            className="button-create"
+            sx={{
+              color: "black",
+            }}
+            onClick={handleModal}
+          >
+            <div>
+              <AddIcon sx={{ height: "30px", width: "2em" }} />
+              <p>Create</p>
+            </div>
+          </Button>
+          <Dialog
+            open={openModal}
+            onClose={handleModal}
+            className="animate__animated animate__backInDown"
+          >
+            <DialogCreateRoom
+              createRoomSocket={(
+                id,
+                name,
+                password,
+                max_number_player,
+                number,
+                owner_id
+              ) => {
+                const data = {
+                  id,
+                  name,
+                  password,
+                  max_number_player,
+                  number,
+                  owner_id,
+                };
+                createRoom(data);
+              }}
+              idRoom={idRoom}
+            />
+          </Dialog>
+        </div>
+        <div className="container-room-lobby">
+          <RoomList />
+        </div>
+      </>
+    );
+  }
 };
