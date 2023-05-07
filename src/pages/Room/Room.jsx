@@ -7,6 +7,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useGeBlackCard } from "../../hooks/useGetBlackCard";
 import { useGeWhiteCard } from "../../hooks/useGetWhiteCard";
+import { ReturnToLobby } from "../../components/ReturnToLobby/ReturnToLobby";
+import "../../fonts.css";
+
 
 export const Room = () => {
   const { blackCards } = useGeBlackCard();
@@ -56,8 +59,14 @@ export const Room = () => {
       <div className="container-buttons">
         {newPlayer.owner && (
           <Button
-            variant="contained"
-            style={{ margin: 10 }}
+          variant="contained"
+          className="custom-button"
+            style={{
+              fontFamily: "Axiforma Heavy",
+              backgroundColor: "#503EB9",
+              borderRadius: 0,
+              margin: 10,
+            }}
             onClick={() => {
               console.log("EMITE-CLICK");
               socket.emit("start-game", {
@@ -68,12 +77,11 @@ export const Room = () => {
               });
             }}
           >
-            Comenzar
+            Start Game
           </Button>
+         
         )}
-        <Button variant="contained" style={{ margin: 10 }} onClick={leaveRoom}>
-          Regresar
-        </Button>
+         <ReturnToLobby />
       </div>
     </div>
   );

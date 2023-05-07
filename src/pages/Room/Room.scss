@@ -1,7 +1,12 @@
-.container-room{
+.container-room {
     display: flex;
-    min-height: 90vh;
+    min-height: 100vh;
     flex-direction: column;
+    background-image: url('../src/assets/Game Background.png');
+    background-size: 100% 100%; /* Updated background-size property */
+    background-repeat: no-repeat;
+    background-position: 25% 10%;
+    overflow: hidden; /* Added overflow property */
 }
 
 .container-slot-player{
@@ -15,3 +20,18 @@
     margin-top: auto;
     justify-content: center;
 }
+
+.custom-button {
+    width: 200px;
+    height: 50px;
+    color: white;
+    border: none;
+    border-radius: 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      opacity: 0.8;
+    }
+  }

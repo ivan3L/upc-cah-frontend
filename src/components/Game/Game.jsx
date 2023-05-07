@@ -102,7 +102,12 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
           textAlign: "center",
         }}
       >
-        {Pzar && `${Pzar.name} is czar`}
+              <Typography
+              variant="inherit"
+              className="czar-text" // Add custom class name here
+            >
+              {Pzar && `${Pzar.name} is czar!`}
+            </Typography>
       </Typography>
 
       <BlackCard blackCard={blackCard} />

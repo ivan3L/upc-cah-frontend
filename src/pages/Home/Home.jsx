@@ -1,18 +1,40 @@
-import { Card, Button, Grid } from "@mui/material";
-import React, { useContext, useEffect } from "react";
+import { Card, Button, Grid, Dialog } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../../assets/WTM Logo.png";
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { v4 as uuidv4 } from "uuid";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
+import { DialogCreateRoom } from "../../components/Dialogs/DialogCreateRoom/DialogCreateRoom";
+import { SocketContext } from "../../context/SocketContext";
 
 export const Home = () => {
+  const [openModal, setopenModal] = useState(false);
   const navigate = useNavigate();
   const idUni = uuidv4();
   const { user, setUser } = useContext(UserContext);
+  const idRoom = uuidv4();  
+  const { socket } = useContext(SocketContext);
+
   const handleUser = (data) => {
     setUser(data);
+  };
+
+  const handleModal = () => {
+    setopenModal(!openModal);
+  };
+
+  const createRoom = (data) => {
+    socket.emit("crear-room", {
+      idRoom: idRoom,
+      roomName: data.name,
+      name: user.name,
+      password: data.password,
+      max_number_player: data.max_number_player,
+      user: user,
+      owner: true,
+    });
   };
 
   useEffect(() => {
@@ -52,9 +74,10 @@ export const Home = () => {
               className="custom-button"
               style={{
                 fontFamily: "Axiforma Heavy",
-                backgroundColor: "#756BB1",
+                backgroundColor: "#1D0F71",
                 borderRadius: 0,
               }}
+              onClick={handleModal}
             >
               CREAR SALA
             </Button>
@@ -66,11 +89,24 @@ export const Home = () => {
               className="custom-button"
               style={{
                 fontFamily: "Axiforma Heavy",
-                backgroundColor: "#503EB9",
+                backgroundColor: "#756BB1",
                 borderRadius: 0,
               }}
             >
               EXPLORAR SALAS
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              className="custom-button"
+              style={{
+                fontFamily: "Axiforma Heavy",
+                backgroundColor: "#503EB9",
+                borderRadius: 0,
+              }}
+            >
+              INGRESAR A SALA
             </Button>
           </Grid>
         </Grid>
@@ -78,6 +114,33 @@ export const Home = () => {
           <Dropdown />
         </Grid>
       </Card>
+      <Dialog
+            open={openModal}
+            onClose={handleModal}
+            className="animate__animated animate__backInDown"
+          >
+            <DialogCreateRoom
+              createRoomSocket={(
+                id,
+                name,
+                password,
+                max_number_player,
+                number,
+                owner_id
+              ) => {
+                const data = {
+                  id,
+                  name,
+                  password,
+                  max_number_player,
+                  number,
+                  owner_id,
+                };
+                createRoom(data);
+              }}
+              idRoom={idRoom}
+            />
+          </Dialog>
     </div>
   );
 };

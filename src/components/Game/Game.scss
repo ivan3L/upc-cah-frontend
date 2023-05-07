@@ -3,3 +3,16 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.czar-text {
+  font-family: "Axiforma Heavy", sans-serif;
+  font-size: 40px; /* Adjust the font size as desired */
+  display: inline-block; /* Ensure the borders wrap around the text */
+  margin: 10px 0; /* Add some margin for spacing */
+  text-shadow:
+    -1px -1px 0 white, /* Top-left */
+    1px -1px 0 white, /* Top-right */
+    -1px 1px 0 white, /* Bottom-left */
+    1px 1px 0 white; /* Bottom-right */
+  /* Add any other desired styles */
+}

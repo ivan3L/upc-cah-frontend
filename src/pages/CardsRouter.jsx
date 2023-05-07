@@ -9,7 +9,6 @@ import { StartGame } from "../pages/StartGame/StartGame";
 export const CardsRouter = () => {
   return (
     <>
-      <NavBar />
       <div className="container">
         <Routes>
           <Route path="/lobby" element={<Lobby />}></Route>

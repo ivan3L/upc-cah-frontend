@@ -41,12 +41,12 @@ export const WhiteCard = ({
           color: "black",
           height: 225,
           width: 175,
-          borderRadius: 5,
+          borderRadius: 0,
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
           alignContent: "center",
-          border: "1px solid black",
+          border: "0px",
           margin: 1,
         }}
       >
@@ -54,27 +54,28 @@ export const WhiteCard = ({
           <img
             className="logo-navbar"
             src={logoBlack}
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "90%", height: "auto" }}
           />
         ) : (
           <Typography sx={{ padding: 2, wordBreak: "break-word" }}>
             {whiteCard.answer}
           </Typography>
         )}
-        {
-          playerCzar && showCorrectCard && correct ? (
-            <CardActions>
-              <IconButton style={{ marginLeft: "auto", color: "black" }}>
-                <CheckIcon sx={{ color: "black" }} />
-              </IconButton>
-            </CardActions>
-          ) : null
-          // <CardActions>
-          //   <IconButton style={{ marginLeft: "auto", color: "black" }}>
-          //     <CloseIcon sx={{ color: "black" }} />
-          //   </IconButton>
-          // </CardActions>
-        }
+        {playerCzar && showCorrectCard && correct ? (
+          <CardActions>
+            <IconButton
+              style={{
+                marginLeft: "auto",
+                color: "green",
+                border: "2px solid black",
+                padding: 8,
+                borderRadius: "50%",
+              }}
+            >
+              <CheckIcon sx={{ fontSize: 28 }} />
+            </IconButton>
+          </CardActions>
+        ) : null}
       </Card>
     </div>
   );
