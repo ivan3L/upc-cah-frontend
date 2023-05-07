@@ -10,7 +10,6 @@ import { Scoreboard } from "./Scoreboard/Scoreboard";
 export const CardsRouter = () => {
   return (
     <>
-      <NavBar />
       <div className="container">
         <Routes>
           <Route path="/lobby" element={<Lobby />}></Route>

@@ -42,6 +42,7 @@ export const Dropdown = () => {
           fontSize: "1rem", // Relative font size
           minWidth: "120px", // Minimum width to maintain the button size
           paddingRight: "1rem", // Adjust the right padding to accommodate the larger icon
+          fontFamily: "Axiforma Heavy, sans-serif", // Set the font family to Axiforma Heavy
         }}
         endIcon={
           menuOpen ? (

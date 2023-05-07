@@ -5,9 +5,7 @@ transition: transform 1s; /* Agrega transición para suavizar el efecto de volte
 }
 .selectable-card.selected {
     background-color: black; /* Color de fondo cuando está seleccionada */
-    border: 1px solid black; /* Borde cuando está seleccionada */
-    box-shadow: 0px 0px 5px #007bff; /* Sombra cuando está seleccionada */
-    border-radius: 20px;
+    box-shadow: 0px 0px 5x #007bff; /* Sombra cuando está seleccionada */
   }
 
   .selectable-card.rotate {

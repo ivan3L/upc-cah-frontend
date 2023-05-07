@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, Typography } from "@mui/material";
 
 export const BlackCard = ({ blackCard }) => {
@@ -14,18 +14,31 @@ export const BlackCard = ({ blackCard }) => {
       {blackCard && blackCard.question ? (
         <Card
           sx={{
-            backgroundColor: "black",
-            color: "white",
-            height: 225,
-            width: 175,
-            borderRadius: 5,
+            height: 100,
+            width: 900,
+            backgroundColor: "rgba(193, 193, 193, 0)",
+            border: "none",
+            boxShadow: "none",
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
             alignContent: "center",
+            textAlign: "center",
           }}
         >
-          <Typography sx={{ padding: 2, wordBreak: "break-word" }}>
+          <Typography
+            sx={{
+              padding: 2,
+              wordBreak: "break-word",
+              fontFamily: "Axiforma Heavy, sans-serif",
+              fontSize: "1.7rem",
+              textTransform: "uppercase", // Make the text uppercase
+              color: "white",
+              textShadow: "1px 1px 1px black",
+              WebkitTextStroke: "1.5px black",
+              WebkitTextFillColor: "white",
+            }}
+          >
             {blackCard.question}
           </Typography>
         </Card>

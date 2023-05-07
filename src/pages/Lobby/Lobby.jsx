@@ -1,4 +1,4 @@
-import { Button, Dialog } from "@mui/material";
+import { Button, Dialog, Grid } from "@mui/material";
 import React, { useContext, useState, useEffect } from "react";
 import { RoomList } from "../../components/RoomList/RoomList";
 import AddIcon from "@mui/icons-material/Add";
@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from "uuid";
 import { DialogCreateRoom } from "../../components/Dialogs/DialogCreateRoom/DialogCreateRoom";
 import { SocketContext } from "../../context/SocketContext";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { Dropdown } from "../../components/Dropdown/Dropdown";
+import { ReturnToHome } from "../../components/ReturnToHome/ReturnToHome";
 import "./Lobby.scss";
 
 export const Lobby = () => {
@@ -43,59 +45,13 @@ export const Lobby = () => {
     return (
       <>
         <div className="container-menu-lobby">
-          <Button
-            className="button-create"
-            sx={{
-              color: "black",
-            }}
-            onClick={joinRoom}
-          >
-            <div>
-              <GroupsIcon sx={{ height: "30px", width: "2em" }} />
-              <p>Join</p>
-            </div>
-          </Button>
-          <Button
-            className="button-create"
-            sx={{
-              color: "black",
-            }}
-            onClick={handleModal}
-          >
-            <div>
-              <AddIcon sx={{ height: "30px", width: "2em" }} />
-              <p>Create</p>
-            </div>
-          </Button>
-          <Dialog
-            open={openModal}
-            onClose={handleModal}
-            className="animate__animated animate__backInDown"
-          >
-            <DialogCreateRoom
-              createRoomSocket={(
-                id,
-                name,
-                password,
-                max_number_player,
-                number,
-                owner_id
-              ) => {
-                const data = {
-                  id,
-                  name,
-                  password,
-                  max_number_player,
-                  number,
-                  owner_id,
-                };
-                createRoom(data);
-              }}
-              idRoom={idRoom}
-            />
-          </Dialog>
+          <Grid item> {/* Wrap the Dropdown component in a separate Grid container */}
+            <ReturnToHome />
+            <Dropdown />
+          </Grid>
         </div>
-        <div className="container-room-lobby">
+        <div className="container-room-lobby" style={{ marginTop: "100px" }}>
+          {/* Add margin-top to create some space */}
           <RoomList />
         </div>
       </>
