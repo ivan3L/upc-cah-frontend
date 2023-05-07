@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { AppBar, Grid, Avatar } from "@mui/material";
-import logoBlack from "../../assets/logoBlack.png";
+import logoBlack from "../../assets/WTM Logo.png";
 import "./NavBar.scss";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";

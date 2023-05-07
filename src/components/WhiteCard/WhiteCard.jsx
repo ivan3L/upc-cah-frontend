@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Card, Typography, CardActions, IconButton } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import logoBlack from "../../assets/logoBlack.png";
+import logoBlack from "../../assets/WTM Logo.png";
 import { SocketContext } from "../../context/SocketContext";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useLocation } from "react-router-dom";

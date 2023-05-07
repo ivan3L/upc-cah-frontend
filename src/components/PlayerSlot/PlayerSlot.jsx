@@ -1,7 +1,7 @@
 import React from "react";
 import "./PlayerSlot.scss";
 import { Avatar, Typography, Grid } from "@mui/material";
-import imagen from "../../assets/logo.png";
+import imagen from "../../assets/WTM Logo.png";
 import { margin } from "@mui/system";
 import StarIcon from "@mui/icons-material/Star";
 

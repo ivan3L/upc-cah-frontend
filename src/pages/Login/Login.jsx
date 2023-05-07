@@ -1,6 +1,6 @@
 import { Card } from "@mui/material";
 import React, { useContext, useEffect } from "react";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/WTM Logo.png";
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import { LoginSocialGoogle } from "reactjs-social-login";
@@ -20,7 +20,7 @@ export const Login = () => {
     const item = localStorage.getItem("user");
     if (item) {
       handleUser(JSON.parse(item));
-      navigate("/lobby");
+      navigate("/login");
     }
   }, []);
 
@@ -31,7 +31,7 @@ export const Login = () => {
     if (token) {
       handleUser(data);
       localStorage.setItem("user", JSON.stringify(data));
-      navigate("/lobby");
+      navigate("/home");
     }
   };
 
@@ -42,11 +42,12 @@ export const Login = () => {
         sx={{
           width: "40%",
           minHeight: "75%",
-          borderRadius: "15px",
-          backgroundColor: "#C1C1C1",
+          backgroundColor: "rgba(193, 193, 193, 0)",
+          border: "none",
+          boxShadow: "none",
         }}
       >
-        <img src={logo} style={{ width: "70vh", height: "45vh" }} />
+        <img src={logo} style={{ width: "45%", height: "45%" }} />
         <LoginSocialGoogle
           client_id="796613161165-8viuck8dada3igblrniqb8qipp0nmdk1.apps.googleusercontent.com"
           onResolve={responseGoogle}
@@ -54,9 +55,6 @@ export const Login = () => {
         >
           <GoogleLoginButton />
         </LoginSocialGoogle>
-        {/* <GoogleButton 
-          onClick={() => {navigate('/lobby')}}
-          /> */}
       </Card>
     </div>
   );

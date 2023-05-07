@@ -1,6 +1,7 @@
-
-
 body {
   margin: 0;
+  background-image: url('../src/assets/Home Background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 25% 10%;
 }
-

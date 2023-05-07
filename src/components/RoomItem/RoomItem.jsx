@@ -11,7 +11,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./RoomItem.scss";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import imagen from "../../assets/logo.png";
+import imagen from "../../assets/WTM Logo.png";
 import "./RoomItem.scss";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { DialogPassword } from "../../components/Dialogs/DialogPassword/DialogPassword";
@@ -69,7 +69,11 @@ export const RoomItem = ({ room }) => {
         </Box>
         <CardMedia
           component="img"
-          sx={{ width: 151, height: 151 }}
+          sx={{
+            width: "50%",
+            height: "100%",
+            objectFit: "contain",
+          }}
           image={imagen}
           alt="Live from space album cover"
         />
