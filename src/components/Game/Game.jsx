@@ -4,7 +4,7 @@ import { BlackCard } from "../BlackCard/BlackCard";
 import { WhiteCard } from "../WhiteCard/WhiteCard";
 import "./Game.scss";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { SocketContext } from "../../context/SocketContext";
 // import { useGetCard } from "../../hooks/useGetBlackCard";
 
@@ -18,6 +18,7 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
   const [user] = useLocalStorage("user");
   const [czarSelection, setCzarSelection] = useState(false);
   const [Pzar, setPzar] = useState({});
+  const navigate = useNavigate();
   const location = useLocation();
   const url = location.pathname;
   const idRoom = url.split("/")[2];
@@ -37,10 +38,13 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
         console.log("RESETGAME2")
         setPlayerCzar(!playerCzar);
         socket.emit("start-game", { idRoom: idRoom });
-
       }
     }
   }, [resetGame]);
+
+  socket.on("game-ended-show-final-scoreboard", (playersInRoom) => {
+    navigate(`/scoreboard/${idRoom}`,{state:{ data: {playersInRoom: playersInRoom}}})
+  });
 
   socket.on("start-game", (game) => {
     console.log("START-GAME3",resetGame)

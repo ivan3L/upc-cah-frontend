@@ -9,12 +9,14 @@ export const StartGame = () => {
   const { socket } = useContext(SocketContext);
   const [resetGame, setResetGame] = useState(false);
 
+  socket.on("reset-game", () => {
+    console.log("reset-game-setimeout")
+      setResetGame(true);
+      setShowCorrectCard(false);
+  });
+
   socket.on("end-czar-answer-selection", () => {
     setShowCorrectCard(true);
-    setTimeout(() => {
-      setShowCorrectCard(false);
-      setResetGame(true);
-    }, 5000);
   });
 
   return (
