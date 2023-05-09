@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "../../fonts.css"; // Adjust the path based on your actual file structure
 
-export const ReturnToLobby = () => {
+export const ReturnToLobby = ({ leaveRoom }) => {
   const navigate = useNavigate();
 
   const goToLobby = () => {
     // Perform logout logic if needed
-    navigate("/lobby");
+    leaveRoom();
   };
 
   return (

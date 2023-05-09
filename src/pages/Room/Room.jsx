@@ -10,16 +10,12 @@ import { useGeWhiteCard } from "../../hooks/useGetWhiteCard";
 import { ReturnToLobby } from "../../components/ReturnToLobby/ReturnToLobby";
 import "../../fonts.css";
 
-
 export const Room = () => {
   const { blackCards } = useGeBlackCard();
   const { whiteCards } = useGeWhiteCard();
 
   const [playersList, setplayersList] = useState([]);
-  const [newPlayer, setnewPlayer] = useState({
-    name: "",
-    owner: false,
-  });
+  const [newPlayer, setnewPlayer] = useState(false);
   const [user] = useLocalStorage("user");
   const { socket } = useContext(SocketContext);
   const location = useLocation();
@@ -30,9 +26,16 @@ export const Room = () => {
   useEffect(() => {
     // console.log("location", location.state.rounds);
     socket.on("playersInRoom", (data) => {
+      console.log("DATA", data.playersInRoom);
       setplayersList(data.playersInRoom);
-      if (data.newPlayer) {
-        setnewPlayer(data.newPlayer);
+      if (data.playersInRoom) {
+        data.playersInRoom.map((item) => {
+          if (item.owner) {
+            if (item.idUser == user.id) {
+              setnewPlayer(true);
+            }
+          }
+        });
       }
     });
   }, [playersList]);
@@ -48,19 +51,22 @@ export const Room = () => {
   socket.on("moveToStartGame", (id) => {
     navigate(`/startgame/${id}`);
   });
-
   return (
     <div className="container-room">
       <div className="container-slot-player">
-        {playersList.map((player) => (
-          <PlayerSlot key={player.id} player={player} />
-        ))}
+        {playersList && playersList.length > 0 ? (
+          playersList.map((player) => (
+            <PlayerSlot key={player.id} player={player} />
+          ))
+        ) : (
+          <h1>ERROR</h1>
+        )}
       </div>
       <div className="container-buttons">
-        {newPlayer.owner && (
+        {newPlayer && (
           <Button
-          variant="contained"
-          className="custom-button"
+            variant="contained"
+            className="custom-button"
             style={{
               fontFamily: "Axiforma Heavy",
               backgroundColor: "#503EB9",
@@ -79,9 +85,8 @@ export const Room = () => {
           >
             Start Game
           </Button>
-         
         )}
-         <ReturnToLobby />
+        <ReturnToLobby leaveRoom={leaveRoom} />
       </div>
     </div>
   );
