@@ -8,15 +8,19 @@ import {
   Button,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./DialogCreateRoom.scss";
 import RoomService from "../../../services/Room/roomService";
 import { Form, useNavigate } from "react-router-dom";
 import useLocalStorage from "../../../hooks/useLocalStorage";
+import { RoomContext } from "../../../context/RoomContext";
+import { SocketContext } from "../../../context/SocketContext";
 
 export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
   const [user] = useLocalStorage("user");
   const navigate = useNavigate();
+  const { addRoom } = useContext(RoomContext);
+  const { socket } = useContext(SocketContext);
 
   const [form, setform] = useState({
     id: user.id,
@@ -46,6 +50,7 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
       idRoom,
       form.rounds
     );
+    socket.emit("getRooms");
   };
 
   const handleClick = async () => {

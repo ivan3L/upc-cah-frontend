@@ -1,11 +1,7 @@
 import { Button, Dialog, Grid } from "@mui/material";
 import React, { useContext, useState, useEffect } from "react";
 import { RoomList } from "../../components/RoomList/RoomList";
-import AddIcon from "@mui/icons-material/Add";
-import GroupsIcon from "@mui/icons-material/Groups";
-import { UserContext } from "../../context/UserContext";
 import { v4 as uuidv4 } from "uuid";
-import { DialogCreateRoom } from "../../components/Dialogs/DialogCreateRoom/DialogCreateRoom";
 import { SocketContext } from "../../context/SocketContext";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
@@ -45,7 +41,9 @@ export const Lobby = () => {
     return (
       <>
         <div className="container-menu-lobby">
-          <Grid item> {/* Wrap the Dropdown component in a separate Grid container */}
+          <Grid item>
+            {" "}
+            {/* Wrap the Dropdown component in a separate Grid container */}
             <ReturnToHome />
             <Dropdown />
           </Grid>
