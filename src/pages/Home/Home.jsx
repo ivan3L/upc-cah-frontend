@@ -79,7 +79,7 @@ export const Home = () => {
               }}
               onClick={handleModal}
             >
-              CREAR SALA
+              CREATE ROOM
             </Button>
           </Grid>
           <Grid item>
@@ -93,7 +93,7 @@ export const Home = () => {
                 borderRadius: 0,
               }}
             >
-              EXPLORAR SALAS
+              EXPLORE ROOMS
             </Button>
           </Grid>
           <Grid item>
@@ -106,7 +106,7 @@ export const Home = () => {
                 borderRadius: 0,
               }}
             >
-              INGRESAR A SALA
+              JOIN ROOM
             </Button>
           </Grid>
         </Grid>

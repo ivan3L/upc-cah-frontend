@@ -6,6 +6,7 @@ import {
   InputLabel,
   InputAdornment,
   Button,
+  Typography,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import React, { useState } from "react";
@@ -65,17 +66,33 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
   return (
     <div className="container-dialog-create-room">
       <form onSubmit={handleSubmit} className="form-create-room">
-        <h1>Crear Room</h1>
-        <hr />
+      <div style={{ textAlign: "center" }}>
+      <Typography
+            variant="h4"
+            component="h1"
+            align="center"
+            style={{
+              fontFamily: 'Axiforma Heavy',
+              color: '#8E85FF',
+              WebkitTextStroke: '2px black',
+              textStroke: '1px black',
+              marginTop: '10px',
+              fontWeight: 'bold',
+              marginBottom: '15px',
+            }}
+          >
+            Create Room
+          </Typography>
+        </div>
         <FormControl>
           <TextField
             id="outlined-size-small"
             size="small"
-            label="Nombre de la sala"
+            label="Room Name"
             name="name"
             value={form.name}
             onChange={handleChange}
-            style={{ padding: 10, width: 350 }}
+            style={{ padding: 0, width: 350, marginBottom: 30 }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start"></InputAdornment>
@@ -85,11 +102,12 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
           <TextField
             id="outlined-size-small"
             size="small"
-            label="Password"
+            label="Password (optional)"
             name="password"
             value={form.password}
             onChange={handleChange}
-            style={{ padding: 10, width: 350 }}
+            style={{ padding: 0, width: 350 }}
+            variant="outlined" 
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start"></InputAdornment>
@@ -104,15 +122,16 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
             alignContent: "center",
             flexWrap: "wrap",
             justifyContent: "center",
+            gap: "10px", // Added gap between the elements
           }}
         >
           <FormControl>
             <InputLabel
               variant="standard"
               htmlFor="uncontrolled-native"
-              style={{ position: "relative" }}
+              style={{ position: "relative", fontSize: "12px", marginLeft: "8px" }}
             >
-              N° de jugadores
+              Max Players
             </InputLabel>
             <Select
               labelId="demo-simple-select-autowidth-label"
@@ -122,7 +141,7 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
               name="max_number_player"
               label="N° de jugadores"
               size="small"
-              style={{ width: 150, margin: 2 }}
+              style={{ width: 170, margin: 0 }}
             >
               <MenuItem value={3}>3</MenuItem>
               <MenuItem value={4}>4</MenuItem>
@@ -134,9 +153,9 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
             <InputLabel
               variant="standard"
               htmlFor="uncontrolled-native"
-              style={{ position: "relative" }}
+              style={{ position: "relative", fontSize: "12px", marginLeft: "8px" }}
             >
-              N° de rondas
+              Rounds
             </InputLabel>
             <Select
               labelId="demo-simple-select-autowidth-label"
@@ -146,7 +165,7 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
               name="rounds"
               label="N° de rondas"
               size="small"
-              style={{ width: 150, margin: 2 }}
+              style={{ width: 170, margin: 0 }}
               required
             >
               <MenuItem value={1}>1</MenuItem>
@@ -157,15 +176,24 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
             </Select>
           </FormControl>
         </div>
+
         <FormControl style={{ display: "flex", justifyContent: "center" }}>
-          <Button
-            onClick={handleClick}
-            variant="contained"
-            style={{ margin: 10 }}
-            endIcon={<SendIcon />}
-          >
-            Aceptar
-          </Button>
+        <div style={{ textAlign: "center" }}>
+        <Button
+          variant="contained"
+          className="custom-button"
+          style={{
+            fontFamily: "Axiforma Heavy",
+            backgroundColor: "#503EB9",
+            borderRadius: 0,
+            margin: 20,
+          }}
+          onClick={handleClick}
+        >
+          Create
+        </Button>
+      </div>
+
         </FormControl>
       </form>
     </div>
