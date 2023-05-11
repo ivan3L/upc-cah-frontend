@@ -16,8 +16,8 @@ export const RoomList = () => {
   }, []);
 
   socket.on("getRooms", (data) => {
-    addRoom(data.data);
     console.log("socketdata", data);
+    addRoom(data.data);
   });
 
   // const fetchData = async () => {
