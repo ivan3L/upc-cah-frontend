@@ -6,7 +6,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setsocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("https://loadbalancer.wtm-upc.online:8084/room");
+    const newSocket = io("https://loadbalancer.wtm-upc.online:8084");
     setsocket(newSocket);
   }, []);
 
