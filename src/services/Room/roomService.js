@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let BASE_URL = "https://wtm-service-257373244.us-east-1.elb.amazonaws.com:8084";
+let BASE_URL = "https://loadbalancer.wtm-upc.online:8084/room";
 
 const RoomService = {
   createRoom: async (
