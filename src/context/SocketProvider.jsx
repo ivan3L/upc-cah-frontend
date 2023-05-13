@@ -6,7 +6,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setsocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:8080");
+    const newSocket = io("https://wtm-service-257373244.us-east-1.elb.amazonaws.com:8084");
     setsocket(newSocket);
   }, []);
 
