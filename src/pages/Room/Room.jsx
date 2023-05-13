@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { PlayerSlot } from "../../components/PlayerSlot/PlayerSlot";
 import { SocketContext } from "../../context/SocketContext";
-import { Button } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Typography,
+} from "@mui/material";
 import "./Room.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -13,7 +21,7 @@ import "../../fonts.css";
 export const Room = () => {
   const { blackCards } = useGeBlackCard();
   const { whiteCards } = useGeWhiteCard();
-
+  const [open, setOpen] = useState(false);
   const [playersList, setplayersList] = useState([]);
   const [newPlayer, setnewPlayer] = useState(false);
   const [user] = useLocalStorage("user");
@@ -40,6 +48,15 @@ export const Room = () => {
     });
   }, [playersList]);
 
+  socket.on("missingOnePlayer", () => {
+    console.log("MISSING");
+    setOpen(true);
+  });
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const leaveRoom = () => {
     socket.emit("leave-room", {
       idRoom: idRoom,
@@ -53,6 +70,20 @@ export const Room = () => {
   });
   return (
     <div className="container-room">
+      <Typography
+        variant="inherit"
+        style={{
+          fontWeight: 700,
+          fontFamily: "Roboto",
+          fontSize: 24,
+          letterSpacing: "-0.015em",
+          marginBottom: 4,
+          width: "100%",
+          textAlign: "center",
+        }}
+      >
+        `Esperando a los jugadores...`
+      </Typography>
       <div className="container-slot-player">
         {playersList && playersList.length > 0 ? (
           playersList.map((player) => (
@@ -87,6 +118,25 @@ export const Room = () => {
           </Button>
         )}
         <ReturnToLobby leaveRoom={leaveRoom} />
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Hace falta 1 jugador"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Para poder iniciar una partida es necesario contar con minimo 2
+              jugador en la sala.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Aceptar</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </div>
   );
