@@ -82,7 +82,7 @@ export const Room = () => {
           textAlign: "center",
         }}
       >
-        `Esperando a los jugadores...`
+        Esperando a los jugadores...
       </Typography>
       <div className="container-slot-player">
         {playersList && playersList.length > 0 ? (

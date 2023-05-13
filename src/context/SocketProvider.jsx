@@ -7,6 +7,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     const newSocket = io("https://loadbalancer.wtm-upc.online:8084");
+    // const newSocket = io("http://localhost:8080");
     setsocket(newSocket);
   }, []);
 
