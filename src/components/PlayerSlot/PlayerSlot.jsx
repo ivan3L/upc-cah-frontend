@@ -2,36 +2,26 @@ import React from "react";
 import "./PlayerSlot.scss";
 import { Avatar, Typography, Grid } from "@mui/material";
 import imagen from "../../assets/WTM Logo.png";
-import { margin } from "@mui/system";
 import StarIcon from "@mui/icons-material/Star";
+import "../../fonts.css";
 
 export const PlayerSlot = ({ player }) => {
   return (
-    <Grid
-      container
-      alignItems="center"
-      justifyContent="center"
-      spacing={1}
-      direction="column"
-      sx={{ margin: 10 }}
-    >
+    <Grid container direction="row" alignItems="center">
       <Grid item>
-        <Avatar src={player.user.picture} sx={{ width: 120, height: 120 }} />
+        <Avatar src={player.user.picture} sx={{ width: 50, height: 50 }} />
       </Grid>
-      <Grid item>
-        <Grid container>
-          <Grid item>
-            <Typography
-              variant="subtitle1"
-              color="textPrimary"
-              alignItems="center"
-              display={"flex"}
-            >
-              {player.name}{" "}
-              {player.owner && <StarIcon style={{ color: "yellow" }} />}
-            </Typography>
-          </Grid>
-        </Grid>
+      <Grid item sx={{ marginLeft: 2 }}>
+        <Typography
+          variant="subtitle1"
+          color="textPrimary"
+          alignItems="center"
+          display={"flex"}
+          style={{ fontFamily: "Axiforma Heavy, sans-serif" }}
+          className="player-name"
+        >
+          {player.name} {player.owner && <StarIcon style={{ marginLeft: "8", color: "yellow" }} />}
+        </Typography>
       </Grid>
     </Grid>
   );
