@@ -101,7 +101,7 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
           fontFamily: "Roboto",
           fontSize: 24,
           letterSpacing: "-0.015em",
-          marginBottom: 4,
+          marginTop: 40,
           width: "100%",
           textAlign: "center",
         }}

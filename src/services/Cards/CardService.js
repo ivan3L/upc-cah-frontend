@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// let BASE_URL = "https://loadbalancer.wtm-upc.online:8084";
+//let BASE_URL = "https://loadbalancer.wtm-upc.online:8084";
 let BASE_URL = "http://localhost:8080";
 
 export const getBlackCards = async () => {
