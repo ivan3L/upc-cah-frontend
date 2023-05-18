@@ -5,19 +5,10 @@ import "./Counter.scss";
 export const Counter = ({ idRoom }) => {
   const [count, setCount] = useState(30);
   const { socket } = useContext(SocketContext);
-
-  useEffect(() => {
-    socket.on("temporizador", (value) => {
-      console.log("value", value);
-      setCount(value);
-    });
+  socket.on("temporizador", (value) => {
+    setCount(value);
   });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      socket.emit("decrementarTemporizador", { idRoom: idRoom });
-    }, 1000);
-  });
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     setCount((count) => (count === 0 ? 30 : count - 1));
