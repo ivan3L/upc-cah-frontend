@@ -3,12 +3,17 @@ import { Grid } from "@mui/material";
 import { Game } from "../../components/Game/Game";
 import { Counter } from "../../components/Counter/Counter";
 import { SocketContext } from "../../context/SocketContext";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./StartGame.scss";
 
 export const StartGame = () => {
   const [showCorrectCard, setShowCorrectCard] = useState(false);
   const { socket } = useContext(SocketContext);
   const [resetGame, setResetGame] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const url = location.pathname;
+  const idRoom = url.split("/")[2];
 
   socket.on("reset-game", () => {
     console.log("reset-game-setimeout");
@@ -25,7 +30,11 @@ export const StartGame = () => {
       <div className="container-start-game">
         <Grid
           container
-          style={{ height: "calc(100vh - 20px)", marginTop: "-10px", marginBottom: "-10px" }}
+          style={{
+            height: "calc(100vh - 20px)",
+            marginTop: "-10px",
+            marginBottom: "-10px",
+          }}
         >
           <Grid item xs={2} style={{ padding: "10px" }}>
             <div className="list-players"></div>
@@ -58,7 +67,7 @@ export const StartGame = () => {
               justifyContent: "flex-start",
             }}
           >
-            {!showCorrectCard ? <Counter /> : null}
+            {!showCorrectCard ? <Counter idRoom={idRoom} /> : null}
           </Grid>
         </Grid>
       </div>
