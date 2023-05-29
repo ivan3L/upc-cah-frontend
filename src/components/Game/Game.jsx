@@ -110,7 +110,7 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
               variant="inherit"
               className="czar-text" // Add custom class name here
             >
-              {Pzar && `${Pzar.name} is czar!`}
+              {Pzar && `${Pzar.name} ,el Zar, está eligiendo una respuesta...`}
             </Typography>
       </Typography>
 

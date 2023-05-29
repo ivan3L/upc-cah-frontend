@@ -20,7 +20,7 @@ export const PlayerSlot = ({ player }) => {
           style={{ fontFamily: "Axiforma Heavy, sans-serif" }}
           className="player-name"
         >
-          {player.name} {player.owner && <StarIcon style={{ marginLeft: "8", color: "yellow" }} />}
+          {player.name} {player.owner && <StarIcon style={{ marginLeft: "8", color: "#F2DF35" }} />}
         </Typography>
       </Grid>
     </Grid>

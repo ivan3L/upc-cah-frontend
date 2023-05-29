@@ -140,7 +140,7 @@ export const Room = () => {
         align="center"
         style={{
           fontFamily: "Axiforma Heavy",
-          color: "yellow",
+          color: "#F2DF35",
           WebkitTextStroke: "3px black",
           textStroke: "1px black",
           marginTop: "5px",

@@ -8,7 +8,7 @@ export const Score = ({ player, index }) => {
       <CardContent>
         <Grid container alignItems="center">
           <Grid item>
-            <Typography variant="h5" component="h2" style={{ fontFamily: 'Axiforma Heavy', color: 'yellow', WebkitTextStroke: '2px black', textStroke: '1px black' }}>
+            <Typography variant="h5" component="h2" style={{ fontFamily: 'Axiforma Heavy', color: '#F2DF35', WebkitTextStroke: '2px black', textStroke: '1px black', fontWeight: 'bold' }}>
               {`${index + 1}`}
             </Typography>
           </Grid>

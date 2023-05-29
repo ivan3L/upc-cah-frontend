@@ -43,15 +43,16 @@ export const Scoreboard = () => {
             align="center"
             style={{
               fontFamily: 'Axiforma Heavy',
-              color: 'yellow',
-              WebkitTextStroke: '3px black',
+              color: '#F2DF35',
+              WebkitTextStroke: '3.5px black',
               textStroke: '1px black',
               marginTop: '10px',
               marginBottom: '2px',
               fontWeight: 'bold',
+              letterSpacing: '-4px', // Adjust the spacing here
             }}
           >
-            Top 5
+            TOP 5
           </Typography>
           {players.map((player, index) => (
             <Score key={player.id} player={player} index={index} />
