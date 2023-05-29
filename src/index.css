@@ -3,5 +3,6 @@ body {
   background-image: url('../src/assets/Home Background.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 25% 10%;
+  background-position: center center;
+  height: 100vh;
 }

@@ -58,21 +58,38 @@ export const Scoreboard = () => {
           ))}
         </CardContent>
       </Card>
-      <Button
-        variant="contained"
-        className="custom-button"
-        style={{
-          fontFamily: 'Axiforma Heavy',
-          backgroundColor: '#1D0F71',
-          borderRadius: 0,
-          margin: 10,
-        }}
-        onClick={() => {
-          navigate('/home');
-        }}
-      >
-        IR A INICIO
-      </Button>
+      <div style={{ display: 'flex', marginTop: '10px' }}>
+        <Button
+          variant="contained"
+          className="custom-button"
+          style={{
+            fontFamily: 'Axiforma Heavy',
+            backgroundColor: '#1D0F71',
+            borderRadius: 0,
+            margin: 10,
+          }}
+          onClick={() => {
+            navigate('/home');
+          }}
+        >
+          IR A INICIO
+        </Button>
+        <Button
+          variant="contained"
+          className="custom-button"
+          style={{
+            fontFamily: 'Axiforma Heavy',
+            backgroundColor: '#1D0F71',
+            borderRadius: 0,
+            margin: 10,
+          }}
+          onClick={() => {
+            window.open('https://forms.gle/YWSQJwhauUVDbDLA7', '_blank');
+          }}
+        >
+          REALIZAR ENCUESTA
+        </Button>
+      </div>
     </div>
   );
 };
