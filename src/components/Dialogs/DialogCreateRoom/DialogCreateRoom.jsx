@@ -65,25 +65,27 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
       form.number,
       form.owner_id
     );
-    navigate(`/room/${idRoom}`, { state: { rounds: form.rounds } });
+    navigate(`/room/${idRoom}`, {
+      state: { rounds: form.rounds, number_player: form.max_number_player },
+    });
   };
 
   return (
     <div className="container-dialog-create-room">
       <form onSubmit={handleSubmit} className="form-create-room">
-      <div style={{ textAlign: "center" }}>
-      <Typography
+        <div style={{ textAlign: "center" }}>
+          <Typography
             variant="h4"
             component="h1"
             align="center"
             style={{
-              fontFamily: 'Axiforma Heavy',
-              color: '#8E85FF',
-              WebkitTextStroke: '2px black',
-              textStroke: '1px black',
-              marginTop: '10px',
-              fontWeight: 'bold',
-              marginBottom: '15px',
+              fontFamily: "Axiforma Heavy",
+              color: "#8E85FF",
+              WebkitTextStroke: "2px black",
+              textStroke: "1px black",
+              marginTop: "10px",
+              fontWeight: "bold",
+              marginBottom: "15px",
             }}
           >
             Create Room
@@ -112,7 +114,7 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
             value={form.password}
             onChange={handleChange}
             style={{ padding: 0, width: 350 }}
-            variant="outlined" 
+            variant="outlined"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start"></InputAdornment>
@@ -134,7 +136,11 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
             <InputLabel
               variant="standard"
               htmlFor="uncontrolled-native"
-              style={{ position: "relative", fontSize: "12px", marginLeft: "8px" }}
+              style={{
+                position: "relative",
+                fontSize: "12px",
+                marginLeft: "8px",
+              }}
             >
               Max Players
             </InputLabel>
@@ -158,7 +164,11 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
             <InputLabel
               variant="standard"
               htmlFor="uncontrolled-native"
-              style={{ position: "relative", fontSize: "12px", marginLeft: "8px" }}
+              style={{
+                position: "relative",
+                fontSize: "12px",
+                marginLeft: "8px",
+              }}
             >
               Rounds
             </InputLabel>
@@ -183,22 +193,21 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
         </div>
 
         <FormControl style={{ display: "flex", justifyContent: "center" }}>
-        <div style={{ textAlign: "center" }}>
-        <Button
-          variant="contained"
-          className="custom-button"
-          style={{
-            fontFamily: "Axiforma Heavy",
-            backgroundColor: "#503EB9",
-            borderRadius: 0,
-            margin: 20,
-          }}
-          onClick={handleClick}
-        >
-          Create
-        </Button>
-      </div>
-
+          <div style={{ textAlign: "center" }}>
+            <Button
+              variant="contained"
+              className="custom-button"
+              style={{
+                fontFamily: "Axiforma Heavy",
+                backgroundColor: "#503EB9",
+                borderRadius: 0,
+                margin: 20,
+              }}
+              onClick={handleClick}
+            >
+              Create
+            </Button>
+          </div>
         </FormControl>
       </form>
     </div>
