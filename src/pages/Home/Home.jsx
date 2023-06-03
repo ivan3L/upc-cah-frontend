@@ -66,7 +66,7 @@ export const Home = () => {
           justifyContent: "center",
         }}
       >
-        <img src={logo} style={{ width: "45%", height: "45%" }} alt="Logo" />
+        <img src={logo} style={{ width: "45%", height: "45%",  marginBottom: "20px"  }} alt="Logo" />
         <Grid container direction="column" alignItems="center" spacing={2}>
           <Grid item>
             <Button
@@ -96,6 +96,7 @@ export const Home = () => {
               EXPLORE ROOMS
             </Button>
           </Grid>
+          {/*
           <Grid item>
             <Button
               variant="contained"
@@ -110,7 +111,8 @@ export const Home = () => {
             </Button>
           </Grid>
         </Grid>
-        <Grid item> {/* Wrap the Dropdown component in a separate Grid container */}
+        <Grid item> 
+        */}
           <Dropdown />
         </Grid>
       </Card>

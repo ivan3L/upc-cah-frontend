@@ -105,46 +105,48 @@ export const Room = () => {
       >
         <Grid
           item
-          xs={2}
+          xs={1}
           sx={{
             display: "grid",
             alignContent: "center",
             justifyContent: "center",
           }}
         >
-          <Box
-            sx={{
-              backgroundColor: "black",
-              borderRadius: "10px",
-              display: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              transform: "perspective(80px) rotateX(10deg)",
-            }}
-            width={130}
-            height={130}
+        <Box
+          sx={{
+            backgroundColor: "black",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 180,
+            height: 160,
+            clipPath: "polygon(7% 0, 92% 8%, 100% 90%, 0% 100%)",
+            border: "none",
+          }}
+        >
+          <Typography
+            color="white"
+            fontFamily="Axiforma Heavy"
+            fontSize={50}
+            sx={{ textAlign: "center" }}
           >
-            <Typography
-              color={"white"}
-              fontFamily={"Axiforma Heavy"}
-              fontSize={50}
-              sx={{ textAlign: "center" }}
-            >
-              {playersList.length}/{nPlayer}
-            </Typography>
-            <Typography
-              color={"white"}
-              fontFamily={"Axiforma Heavy"}
-              fontSize={20}
-              sx={{ textAlign: "center" }}
-            >
-              Jugadores Listos
-            </Typography>
-          </Box>
+            {playersList.length}/{nPlayer}
+          </Typography>
+          <Typography
+            color="white"
+            fontFamily="Axiforma Heavy"
+            fontSize={20}
+            sx={{ textAlign: "center" }}
+          >
+            JUGADORES LISTOS
+          </Typography>
+        </Box>
+
         </Grid>
         <Grid
           item
-          xs={3}
+          xs={4}
           sx={{
             display: "grid",
             alignContent: "center",
@@ -163,7 +165,7 @@ export const Room = () => {
         </Grid>
         <Grid
           item
-          xs={7}
+          xs={5}
           sx={{
             display: "flex",
             alignContent: "center",
@@ -171,7 +173,7 @@ export const Room = () => {
           }}
         >
           <Card
-            sx={{ width: "55%", border: "5px solid black", borderRadius: 0 }}
+            sx={{ width: "100%", border: "5px solid black", borderRadius: 0, marginLeft: "-45px" }}
           >
             <CardContent
               style={{
@@ -186,7 +188,7 @@ export const Room = () => {
               <CardMedia
                 component="img"
                 sx={{
-                  width: "20%",
+                  width: "30%",
                   height: "auto",
                   objectFit: "contain",
                 }}
@@ -294,11 +296,11 @@ export const Room = () => {
       >
         <Typography
           color={"white"}
-          marginLeft={2}
+          marginLeft={5}
           fontFamily={"Axiforma Heavy"}
-          fontSize={20}
+          fontSize={30}
         >
-          Esperando jugadores...
+          ESPERANDO JUGADORES...
         </Typography>
       </Box>
     </div>

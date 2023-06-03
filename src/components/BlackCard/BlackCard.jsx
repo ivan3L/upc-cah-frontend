@@ -8,13 +8,13 @@ export const BlackCard = ({ blackCard }) => {
         width: "100%",
         display: "flex",
         justifyContent: "center",
-        marginBlock: 20,
+        marginBlock: 0,
       }}
     >
       {blackCard && blackCard.question ? (
         <Card
           sx={{
-            height: 100,
+            height: 80,
             width: 900,
             backgroundColor: "rgba(193, 193, 193, 0)",
             border: "none",

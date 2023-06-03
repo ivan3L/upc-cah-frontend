@@ -59,7 +59,7 @@ export const Scoreboard = () => {
           ))}
         </CardContent>
       </Card>
-      <div style={{ display: 'flex', marginTop: '10px' }}>
+      <div style={{ display: 'flex', marginTop: '40px' }}>
         <Button
           variant="contained"
           className="custom-button"

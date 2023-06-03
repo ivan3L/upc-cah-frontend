@@ -47,7 +47,7 @@ export const Login = () => {
           boxShadow: "none",
         }}
       >
-        <img src={logo} style={{ width: "45%", height: "45%" }} />
+        <img src={logo} style={{ width: "45%", height: "45%", marginBottom: "10px"  }} />
         <LoginSocialGoogle
           client_id="796613161165-8viuck8dada3igblrniqb8qipp0nmdk1.apps.googleusercontent.com"
           onResolve={responseGoogle}

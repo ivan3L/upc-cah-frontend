@@ -4,7 +4,7 @@ import '../../fonts.css'; // Import the font CSS file
 
 export const Score = ({ player, index }) => {
   return (
-    <Card key={player.id} style={{ marginBottom: '0px', width: '95%', height: '68px', margin: 5, backgroundColor: '#EFEFFF' }}>
+    <Card key={player.id} style={{ marginBottom: '12px', width: '95%', height: '68px', margin: 5, backgroundColor: '#EFEFFF', boxShadow: 'none'  }}>
       <CardContent>
         <Grid container alignItems="center">
           <Grid item>
