@@ -94,25 +94,12 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
 
   return (
     <div className="game-container">
-      <Typography
-        variant="inherit"
-        style={{
-          fontWeight: 700,
-          fontFamily: "Roboto",
-          fontSize: 24,
-          letterSpacing: "-0.015em",
-          marginTop: "15%",
-          width: "100%",
-          textAlign: "center",
-        }}
-      >
               <Typography
               variant="inherit"
               className="czar-text" // Add custom class name here
             >
-              {Pzar && `${Pzar.name} ,el Zar, está eligiendo una respuesta...`}
+              {Pzar && `${Pzar.name}, el Zar, está eligiendo una respuesta...`.toUpperCase()}
             </Typography>
-      </Typography>
 
       <BlackCard blackCard={blackCard} />
       {czarSelection && playerCzar

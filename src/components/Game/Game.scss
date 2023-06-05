@@ -2,11 +2,13 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  height: fit-content;
 }
+
 
 .czar-text {
   font-family: "Axiforma Heavy", sans-serif;
-  font-size: 40px; /* Adjust the font size as desired */
+  font-size: 28px; /* Adjust the font size as desired */
   display: inline-block; /* Ensure the borders wrap around the text */
   margin: 10px 0; /* Add some margin for spacing */
   text-shadow:

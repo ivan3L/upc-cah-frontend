@@ -165,7 +165,7 @@ export const Room = () => {
         </Grid>
         <Grid
           item
-          xs={5}
+          xs={4}
           sx={{
             display: "flex",
             alignContent: "center",

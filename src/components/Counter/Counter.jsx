@@ -18,7 +18,7 @@ export const Counter = ({ idRoom }) => {
 
   return (
     <div className="counter-container">
-      <h1 className="counter-text">{count}</h1>
+      <h1 className="counter-text">00:{count.toString().padStart(2, '0')}</h1>
     </div>
   );
 };

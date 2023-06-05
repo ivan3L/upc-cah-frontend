@@ -37,6 +37,8 @@ export const BlackCard = ({ blackCard }) => {
               textShadow: "1px 1px 1px black",
               WebkitTextStroke: "1.5px black",
               WebkitTextFillColor: "white",
+              display: "flex",
+              alignItems: "flex-end",
             }}
           >
             {blackCard.question}

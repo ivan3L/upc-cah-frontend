@@ -1,13 +1,13 @@
 .counter-container {
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 130px;
-    height: 70px;
-    border-radius: 10px;
-    transform: perspective(80px) rotateX(10deg);
-  }
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 90px;
+  clip-path: polygon(5% 0, 95% 10%, 100% 93%, 0% 100%);  
+}
+
   
   
   .counter-text {

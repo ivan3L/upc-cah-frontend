@@ -46,7 +46,7 @@ export const WhiteCard = ({
           flexWrap: "wrap",
           justifyContent: "center",
           alignContent: "center",
-          border: "0px",
+          border: "4px solid black",
           margin: 1,
         }}
       >

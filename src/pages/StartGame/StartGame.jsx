@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Box, CardMedia } from "@mui/material";
 import { Game } from "../../components/Game/Game";
 import { Counter } from "../../components/Counter/Counter";
 import { SocketContext } from "../../context/SocketContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./StartGame.scss";
+import logo from "../../assets/WTM Logo.png";
 
 export const StartGame = () => {
   const [showCorrectCard, setShowCorrectCard] = useState(false);
@@ -28,22 +29,29 @@ export const StartGame = () => {
   return (
     <>
       <div className="container-start-game">
+      <Box>
+      <img src={logo} style={{ width: "12%", height: "12%",  marginLeft: "3%", marginTop: "2%", }} alt="Logo" /> 
+      </Box>
+        <Box
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginRight: "3%",
+            }}
+          >
+            {!showCorrectCard ? <Counter idRoom={idRoom} /> : null}
+        </Box>
         <Grid
           container
           style={{
-            height: "calc(100vh - 20px)",
-            marginTop: "-10px",
+            marginTop: "5%",
             marginBottom: "-10px",
           }}
         >
-          <Grid item xs={2} style={{ padding: "10px" }}>
-            <div className="list-players"></div>
-          </Grid>
           <Grid
             item
-            xs={8}
+            xs={12}
             style={{
-              height: "100%",
               display: "flex",
               alignContent: "center",
               justifyContent: "center",
@@ -56,18 +64,6 @@ export const StartGame = () => {
               resetGame={resetGame}
               setResetGame={setResetGame}
             />
-          </Grid>
-          <Grid
-            item
-            xs={2}
-            style={{
-              padding: "10px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            {!showCorrectCard ? <Counter idRoom={idRoom} /> : null}
           </Grid>
         </Grid>
       </div>

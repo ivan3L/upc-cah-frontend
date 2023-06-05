@@ -2,9 +2,31 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-image: url('../src/assets/Game Background.png');
+    background-image: url('../src/assets/ingame background.png');
     background-size: 100% 100%; /* Updated background-size property */
     background-repeat: no-repeat;
     background-position: 25% 10%;
     overflow: hidden; /* Added overflow property */
 }
+.counter-container {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 75px;
+    border-radius: 0px;
+    clip-path: polygon(7% 0, 92% 8%, 100% 90%, 0% 100%);
+    position: absolute;
+    top: 5%;
+    z-index: 999;
+  }
+  
+  .top-left {
+    left: 20px;
+  }
+  
+  .top-right {
+    right: 20px;
+  }
+  
