@@ -55,7 +55,7 @@ export const Dropdown = () => {
         <Grid
           className="avatar"
           item
-          xs={8.9}
+          xs={12}
           sx={{ display: "flex", alignItems: "center" }}
         >
           <Avatar
