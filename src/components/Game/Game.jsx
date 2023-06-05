@@ -91,15 +91,26 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
     }
   };
   console.log("player2",playerCzar)
-
+//Si es zar y los demás no han elegido, "Eres zar. Espera a que los demás elijan sus cartas blancas."
+//Si no es zar y aún no ha elegido, "Pepito es zar. Selecciona tu carta blanca."
+//Si no es zar y ya eligió, "Pepito, el Zar, está eligiendo una respuesta."
+//Si es zar y los demás ya eligieron, "Eres Zar. Selecciona tu respuesta."
   return (
     <div className="game-container">
-              <Typography
-              variant="inherit"
-              className="czar-text" // Add custom class name here
-            >
-              {Pzar && `${Pzar.name}, el Zar, está eligiendo una respuesta...`.toUpperCase()}
-            </Typography>
+             <Typography
+                variant="inherit"
+                className="czar-text" // Add custom class name here
+              >
+                {playerCzar
+                  ? czarSelection
+                    ? `Eres zar. Selecciona tu respuesta.`.toUpperCase() // Situation 1
+                    : `Eres Zar. Espera a que los demás elijan sus cartas blancas.`.toUpperCase()  // Situation 2
+                  : czarSelection
+                  ? `${Pzar.name}, el Zar, está eligiendo una respuesta.`.toUpperCase()  // Situation 3
+                  : `${Pzar.name} es Zar. Selecciona tu carta blanca.`.toUpperCase()  // Situation 4
+                }
+              </Typography>
+
 
       <BlackCard blackCard={blackCard} />
       {czarSelection && playerCzar

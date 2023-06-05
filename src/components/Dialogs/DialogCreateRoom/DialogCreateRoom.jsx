@@ -192,7 +192,6 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
               <MenuItem value={6}>6</MenuItem>
               <MenuItem value={7}>7</MenuItem>
               <MenuItem value={8}>8</MenuItem>
-              <MenuItem value={38}>38</MenuItem>
             </Select>
           </FormControl>
         </div>
