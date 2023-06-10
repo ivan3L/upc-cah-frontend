@@ -1,8 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Card, Typography, CardActions, IconButton } from "@mui/material";
+import {
+  Card,
+  Typography,
+  CardActions,
+  IconButton,
+  CardContent,
+} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import logoBlack from "../../assets/WTM Logo.png";
+import check from "../../assets/check.png";
 import { SocketContext } from "../../context/SocketContext";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useLocation } from "react-router-dom";
@@ -27,7 +34,7 @@ export const WhiteCard = ({
   return (
     <div
       className={`selectable-card ${selectedCard === id ? "selected" : ""} ${
-        czarSelection ? "rotate" : null
+        czarSelection ? "rotate" : "rotate"
       }`}
       style={{ height: 245 }}
     >
@@ -50,32 +57,26 @@ export const WhiteCard = ({
           margin: 1,
         }}
       >
-        {playerCzar && !czarSelection ? (
-          <img
-            className="logo-navbar"
-            src={logoBlack}
-            style={{ width: "90%", height: "auto" }}
-          />
-        ) : (
-          <Typography sx={{ padding: 2, wordBreak: "break-word" }}>
-            {whiteCard.answer}
-          </Typography>
-        )}
+        <CardContent>
+          {playerCzar && !czarSelection ? (
+            <img
+              className="logo-navbar"
+              src={logoBlack}
+              style={{ width: "90%", height: "auto" }}
+            />
+          ) : (
+            <Typography sx={{ padding: 2, wordBreak: "break-word" }}>
+              {whiteCard.answer}
+            </Typography>
+          )}
+        </CardContent>
         {playerCzar && showCorrectCard && correct ? (
-          <CardActions>
-            <IconButton
-              style={{
-                marginLeft: "auto",
-                color: "green",
-                border: "2px solid black",
-                padding: 8,
-                borderRadius: "50%",
-              }}
-            >
-              <CheckIcon sx={{ fontSize: 28 }} />
-            </IconButton>
+          <CardActions height={"25px"}>
+            <img src={check} height={"30px"} width={"30px"} />
           </CardActions>
-        ) : null}
+        ) : (
+          <></>
+        )}
       </Card>
     </div>
   );

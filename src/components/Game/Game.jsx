@@ -18,24 +18,20 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
   const [user] = useLocalStorage("user");
   const [czarSelection, setCzarSelection] = useState(false);
   const [Pzar, setPzar] = useState({});
+  const [endingRound, setEndingRound] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const url = location.pathname;
   const idRoom = url.split("/")[2];
 
-  
-
   useEffect(() => {
     if (resetGame) {
-      console.log("reset-game-true")
-      console.log("flag-czar-empieza-como", playerCzar)
       setSelectedCards([]);
       setSelectedCard(null);
       setCzarSelection(false);
       setResetGame(false);
-      console.log("player",playerCzar)
+      setEndingRound(false);
       if (playerCzar) {
-        console.log("RESETGAME2")
         setPlayerCzar(!playerCzar);
         socket.emit("start-game", { idRoom: idRoom });
       }
@@ -43,19 +39,21 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
   }, [resetGame]);
 
   socket.on("game-ended-show-final-scoreboard", (playersInRoom) => {
-    navigate(`/scoreboard/${idRoom}`,{state:{ data: {playersInRoom: playersInRoom}}})
+    navigate(`/scoreboard/${idRoom}`, {
+      state: { data: { playersInRoom: playersInRoom } },
+    });
   });
 
   socket.on("start-game", (game) => {
-    console.log("START-GAME3",resetGame)
+    console.log("START-GAME3", resetGame);
     setBlackCard(game.currentBlackCard);
     setWhiteCard(game.currentWhiteCards);
     setCorrectCard(game.currentCorrectWhiteCard);
     const { czar } = game;
-    console.log("czar",czar)
-    console.log("NAVEGADOR",user)
+    console.log("czar", czar);
+    console.log("NAVEGADOR", user);
 
-    //CZAR 
+    //CZAR
     //USUARIO
     setPzar(czar);
     if (czar.idUser == user.id) {
@@ -64,13 +62,11 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
   });
 
   socket.on("start-czar-answer-selection", (selections) => {
-    console.log("SELECTIONS",selections)
     setCzarSelection(true);
     setSelectedCards(selections);
   });
 
   const handleCardClick = (card) => {
-    console.log(card);
     if (!playerCzar && !czarSelection) {
       //cuando eligen los jugadores
       setSelectedCard(card.id);
@@ -80,8 +76,8 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
         whiteCard: card,
       });
       // Actualiza el estado con el ID de la tarjeta seleccionada
-    } else if (playerCzar && czarSelection) {
-      //Cuado elige el czar
+    } else if (playerCzar && czarSelection && !endingRound) {
+      setEndingRound(true);
       setSelectedCard(card.id);
       socket.emit("czar-answer-selection", {
         userId: user.id,
@@ -90,27 +86,16 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
       });
     }
   };
-  console.log("player2",playerCzar)
-//Si es zar y los demás no han elegido, "Eres zar. Espera a que los demás elijan sus cartas blancas."
-//Si no es zar y aún no ha elegido, "Pepito es zar. Selecciona tu carta blanca."
-//Si no es zar y ya eligió, "Pepito, el Zar, está eligiendo una respuesta."
-//Si es zar y los demás ya eligieron, "Eres Zar. Selecciona tu respuesta."
+
   return (
     <div className="game-container">
-             <Typography
-                variant="inherit"
-                className="czar-text" // Add custom class name here
-              >
-                {playerCzar
-                  ? czarSelection
-                    ? `Eres zar. Selecciona tu respuesta.`.toUpperCase() // Situation 1
-                    : `Eres Zar. Espera a que los demás elijan sus cartas blancas.`.toUpperCase()  // Situation 2
-                  : czarSelection
-                  ? `${Pzar.name}, el Zar, está eligiendo una respuesta.`.toUpperCase()  // Situation 3
-                  : `${Pzar.name} es Zar. Selecciona tu carta blanca.`.toUpperCase()  // Situation 4
-                }
-              </Typography>
-
+      <Typography
+        variant="inherit"
+        className="czar-text" // Add custom class name here
+      >
+        {Pzar &&
+          `${Pzar.name}, el Zar, está eligiendo una respuesta...`.toUpperCase()}
+      </Typography>
 
       <BlackCard blackCard={blackCard} />
       {czarSelection && playerCzar
