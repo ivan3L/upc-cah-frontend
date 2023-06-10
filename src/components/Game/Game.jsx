@@ -89,13 +89,19 @@ export const Game = ({ showCorrectCard, socket, resetGame, setResetGame }) => {
 
   return (
     <div className="game-container">
-      <Typography
-        variant="inherit"
-        className="czar-text" // Add custom class name here
-      >
-        {Pzar &&
-          `${Pzar.name}, el Zar, está eligiendo una respuesta...`.toUpperCase()}
-      </Typography>
+             <Typography
+                variant="inherit"
+                className="czar-text" // Add custom class name here
+              >
+                {playerCzar
+                  ? czarSelection
+                    ? `Eres zar. Selecciona tu respuesta.`.toUpperCase() // Situation 1
+                    : `Eres Zar. Espera a que los demás elijan sus cartas blancas.`.toUpperCase()  // Situation 2
+                  : czarSelection
+                  ? `${Pzar.name}, el Zar, está eligiendo una respuesta.`.toUpperCase()  // Situation 3
+                  : `${Pzar.name} es Zar. Selecciona tu carta blanca.`.toUpperCase()  // Situation 4
+                }
+              </Typography>
 
       <BlackCard blackCard={blackCard} />
       {czarSelection && playerCzar
