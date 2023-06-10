@@ -6,14 +6,11 @@ import {
   IconButton,
   CardContent,
 } from "@mui/material";
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
-import logoBlack from "../../assets/WTM Logo.png";
+
+import logoBlack from "../../assets/question.png";
 import check from "../../assets/check.png";
-import { SocketContext } from "../../context/SocketContext";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import equis from "../../assets/equis.png";
 import { useLocation } from "react-router-dom";
-import CardFlip from "react-card-flip";
 import "./WhiteCards.scss";
 
 export const WhiteCard = ({
@@ -26,58 +23,72 @@ export const WhiteCard = ({
   correct,
   id,
 }) => {
-  const { socket } = useContext(SocketContext);
-  const [user] = useLocalStorage("user");
   const location = useLocation();
   const url = location.pathname;
-  const idRoom = url.split("/")[2];
   return (
-    <div
+    <Card
       className={`selectable-card ${selectedCard === id ? "selected" : ""} ${
-        czarSelection ? "rotate" : "rotate"
+        czarSelection ? "rotate" : null
       }`}
-      style={{ height: 245 }}
+      onClick={() => {
+        console.log("click");
+        handleCardClick(whiteCard);
+      }}
+      sx={{
+        backgroundColor: "white",
+        color: "black",
+        height: 250,
+        width: 200,
+        borderRadius: 0,
+        border: "4px solid black",
+        margin: 1,
+      }}
     >
-      <Card
-        onClick={() => {
-          console.log("click");
-          handleCardClick(whiteCard);
-        }}
+      <CardContent
         sx={{
-          backgroundColor: "white",
-          color: "black",
-          height: 225,
-          width: 175,
-          borderRadius: 0,
           display: "flex",
-          flexWrap: "wrap",
           justifyContent: "center",
-          alignContent: "center",
-          border: "4px solid black",
-          margin: 1,
+          flexWrap: "wrap",
+          alignContent: playerCzar && !czarSelection ? "flex-end" : undefined,
+          height: "165px",
+          paddingTop: "30px",
         }}
       >
-        <CardContent>
-          {playerCzar && !czarSelection ? (
-            <img
-              className="logo-navbar"
-              src={logoBlack}
-              style={{ width: "90%", height: "auto" }}
-            />
-          ) : (
-            <Typography sx={{ padding: 2, wordBreak: "break-word" }}>
-              {whiteCard.answer}
-            </Typography>
-          )}
-        </CardContent>
+        {playerCzar && !czarSelection ? (
+          <img
+            className="logo-navbar"
+            src={logoBlack}
+            style={{ width: "60%", height: "85%" }}
+          />
+        ) : (
+          <Typography
+            sx={{
+              wordBreak: "break-word",
+              fontFamily: "Axiforma Heavy, sans-serif",
+            }}
+          >
+            {whiteCard.answer}
+          </Typography>
+        )}
+      </CardContent>
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignContent: "flex-end",
+        }}
+      >
         {playerCzar && showCorrectCard && correct ? (
-          <CardActions height={"25px"}>
-            <img src={check} height={"30px"} width={"30px"} />
-          </CardActions>
+          <img src={check} height={"30px"} width={"30px"} />
         ) : (
           <></>
         )}
-      </Card>
-    </div>
+        {playerCzar && showCorrectCard && !correct && selectedCard == id ? (
+          <img src={equis} height={"30px"} width={"30px"} />
+        ) : (
+          <></>
+        )}
+      </CardActions>
+    </Card>
   );
 };

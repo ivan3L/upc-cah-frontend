@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, Typography, Button, CardMedia } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Score } from '../../components/Score/Score';
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  CardMedia,
+} from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Score } from "../../components/Score/Score";
 import imagen from "../../assets/WTM Logo.png";
 
 export const Scoreboard = () => {
@@ -14,25 +20,41 @@ export const Scoreboard = () => {
     setPlayers(location.state.data.playersInRoom);
   }, []);
 
-  console.log('players,', players);
+  console.log("players,", players);
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
-    }}>
-      <Card sx={{ width: '45%', height: 'auto', border: '5px solid black', borderRadius: 0 }}>
-        <CardContent style={{ marginTop: '0px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Card
+        sx={{
+          width: "45%",
+          height: "auto",
+          border: "5px solid black",
+          borderRadius: 0,
+        }}
+      >
+        <CardContent
+          style={{
+            marginTop: "0px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <CardMedia
             component="img"
             sx={{
               width: "35%",
               height: "auto",
               objectFit: "contain",
-              margin: 'auto',
+              margin: "auto",
             }}
             image={imagen}
             alt="WTM Logo"
@@ -42,14 +64,14 @@ export const Scoreboard = () => {
             component="h1"
             align="center"
             style={{
-              fontFamily: 'Axiforma Heavy',
-              color: '#F2DF35',
-              WebkitTextStroke: '3.5px black',
-              textStroke: '1px black',
-              marginTop: '10px',
-              marginBottom: '2px',
-              fontWeight: 'bold',
-              letterSpacing: '-4px', // Adjust the spacing here
+              fontFamily: "Axiforma Heavy",
+              color: "#F2DF35",
+              WebkitTextStroke: "4px black",
+              textStroke: "5px black",
+              marginTop: "10px",
+              marginBottom: "2px",
+              fontWeight: "900",
+              letterSpacing: "-4px", // Adjust the spacing here
             }}
           >
             TOP 5
@@ -59,18 +81,18 @@ export const Scoreboard = () => {
           ))}
         </CardContent>
       </Card>
-      <div style={{ display: 'flex', marginTop: '40px' }}>
+      <div style={{ display: "flex", marginTop: "40px" }}>
         <Button
           variant="contained"
           className="custom-button"
           style={{
-            fontFamily: 'Axiforma Heavy',
-            backgroundColor: '#1D0F71',
+            fontFamily: "Axiforma Heavy",
+            backgroundColor: "#1D0F71",
             borderRadius: 0,
             margin: 10,
           }}
           onClick={() => {
-            navigate('/home');
+            navigate("/home");
           }}
         >
           IR A INICIO
@@ -79,13 +101,13 @@ export const Scoreboard = () => {
           variant="contained"
           className="custom-button"
           style={{
-            fontFamily: 'Axiforma Heavy',
-            backgroundColor: '#1D0F71',
+            fontFamily: "Axiforma Heavy",
+            backgroundColor: "#1D0F71",
             borderRadius: 0,
             margin: 10,
           }}
           onClick={() => {
-            window.open('https://forms.gle/YWSQJwhauUVDbDLA7', '_blank');
+            window.open("https://forms.gle/YWSQJwhauUVDbDLA7", "_blank");
           }}
         >
           REALIZAR ENCUESTA

@@ -1,11 +1,10 @@
 
-.selectable-card {
-transition: transform 1s; /* Agrega transición para suavizar el efecto de volteo */
-  transform-style: preserve-3d
+.selectable-card { /* Agrega transición para suavizar el efecto de volteo */
+  transform-style: preserve-3d;
+  cursor: pointer;
 }
 .selectable-card.selected {
-    background-color: black; /* Color de fondo cuando está seleccionada */
-    box-shadow: 0px 0px 5x #007bff; /* Sombra cuando está seleccionada */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.9);
   }
 
   .selectable-card.rotate {
