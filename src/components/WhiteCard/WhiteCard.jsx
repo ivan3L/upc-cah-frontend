@@ -7,9 +7,9 @@ import {
   CardContent,
 } from "@mui/material";
 
-import logoBlack from "../../assets/question.png";
-import check from "../../assets/check.png";
-import equis from "../../assets/equis.png";
+import logoBlack from "../../assets/question.svg";
+import check from "../../assets/check.svg";
+import equis from "../../assets/equis.svg";
 import { useLocation } from "react-router-dom";
 import "./WhiteCards.scss";
 
