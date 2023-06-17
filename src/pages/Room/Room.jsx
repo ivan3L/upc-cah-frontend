@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { PlayerSlot } from "../../components/PlayerSlot/PlayerSlot";
 import { SocketContext } from "../../context/SocketContext";
+import instrucciones from "../../assets/instrucciones.png";
 import {
   Button,
   Dialog,
@@ -112,37 +113,36 @@ export const Room = () => {
             justifyContent: "center",
           }}
         >
-        <Box
-          sx={{
-            backgroundColor: "black",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 180,
-            height: 160,
-            clipPath: "polygon(7% 0, 92% 8%, 100% 90%, 0% 100%)",
-            border: "none",
-          }}
-        >
-          <Typography
-            color="white"
-            fontFamily="Axiforma Heavy"
-            fontSize={50}
-            sx={{ textAlign: "center" }}
+          <Box
+            sx={{
+              backgroundColor: "black",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 180,
+              height: 160,
+              clipPath: "polygon(7% 0, 92% 8%, 100% 90%, 0% 100%)",
+              border: "none",
+            }}
           >
-            {playersList.length}/{nPlayer}
-          </Typography>
-          <Typography
-            color="white"
-            fontFamily="Axiforma Heavy"
-            fontSize={20}
-            sx={{ textAlign: "center" }}
-          >
-            JUGADORES LISTOS
-          </Typography>
-        </Box>
-
+            <Typography
+              color="white"
+              fontFamily="Axiforma Heavy"
+              fontSize={50}
+              sx={{ textAlign: "center" }}
+            >
+              {playersList.length}/{nPlayer}
+            </Typography>
+            <Typography
+              color="white"
+              fontFamily="Axiforma Heavy"
+              fontSize={20}
+              sx={{ textAlign: "center" }}
+            >
+              JUGADORES LISTOS
+            </Typography>
+          </Box>
         </Grid>
         <Grid
           item
@@ -173,7 +173,12 @@ export const Room = () => {
           }}
         >
           <Card
-            sx={{ width: "100%", border: "5px solid black", borderRadius: 0, marginLeft: "-45px" }}
+            sx={{
+              width: "100%",
+              border: "5px solid black",
+              borderRadius: 0,
+              marginLeft: "-45px",
+            }}
           >
             <CardContent
               style={{
@@ -182,7 +187,6 @@ export const Room = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                height: "100%",
               }}
             >
               <CardMedia
@@ -195,22 +199,17 @@ export const Room = () => {
                 image={imagen}
                 alt="WTM Logo"
               />
-              <Typography
-                variant="h3"
-                component="h1"
-                align="center"
-                style={{
-                  fontFamily: "Axiforma Heavy",
-                  color: "#F2DF35",
-                  WebkitTextStroke: "3px black",
-                  textStroke: "1px black",
-                  marginTop: "5px",
-                  marginBottom: "2px",
-                  fontWeight: "bold",
+              <CardMedia
+                component="img"
+                sx={{
+                  width: "70%",
+                  height: "100%",
+                  objectFit: "contain",
+                  margin: "auto",
                 }}
-              >
-                Instrucciones
-              </Typography>
+                image={instrucciones}
+                alt="WTM Logo"
+              />
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Typography
                   variant="h6"

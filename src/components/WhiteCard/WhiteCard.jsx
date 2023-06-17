@@ -27,9 +27,11 @@ export const WhiteCard = ({
   const url = location.pathname;
   return (
     <Card
-      className={`selectable-card ${selectedCard === id ? "selected" : ""} ${
-        czarSelection ? "rotate" : null
-      }`}
+      className={`animate__animated ${
+        selectedCard === id ? "animate__heartBeat" : ""
+      } ${
+        selectedCard === id ? "selectable-card selected" : "selectable-card"
+      } `}
       onClick={() => {
         console.log("click");
         handleCardClick(whiteCard);
@@ -42,6 +44,8 @@ export const WhiteCard = ({
         borderRadius: 0,
         border: "4px solid black",
         margin: 1,
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <CardContent
@@ -63,6 +67,7 @@ export const WhiteCard = ({
         ) : (
           <Typography
             sx={{
+              maxHeight: "165px",
               wordBreak: "break-word",
               fontFamily: "Axiforma Heavy, sans-serif",
             }}
@@ -76,15 +81,18 @@ export const WhiteCard = ({
           display: "flex",
           justifyContent: "flex-end",
           alignContent: "flex-end",
+          height: "40px",
+          paddingBottom: "30px",
+          paddingRight: "16px",
         }}
       >
         {playerCzar && showCorrectCard && correct ? (
-          <img src={check} height={"30px"} width={"30px"} />
+          <img src={check} height={"60px"} width={"60px"} />
         ) : (
           <></>
         )}
         {playerCzar && showCorrectCard && !correct && selectedCard == id ? (
-          <img src={equis} height={"30px"} width={"30px"} />
+          <img src={equis} height={"60px"} width={"60px"} />
         ) : (
           <></>
         )}

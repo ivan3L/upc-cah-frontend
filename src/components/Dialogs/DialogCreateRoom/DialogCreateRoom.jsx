@@ -16,6 +16,7 @@ import { Form, useNavigate } from "react-router-dom";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import { RoomContext } from "../../../context/RoomContext";
 import { SocketContext } from "../../../context/SocketContext";
+import create from "../../../assets/create.png";
 
 export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
   const [user] = useLocalStorage("user");
@@ -73,23 +74,15 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
   return (
     <div className="container-dialog-create-room">
       <form onSubmit={handleSubmit} className="form-create-room">
-        <div style={{ textAlign: "center" }}>
-          <Typography
-            variant="h4"
-            component="h1"
-            align="center"
-            style={{
-              fontFamily: "Axiforma Heavy",
-              color: "#8E85FF",
-              WebkitTextStroke: "2px black",
-              textStroke: "1px black",
-              marginTop: "10px",
-              fontWeight: "bold",
-              marginBottom: "15px",
-            }}
-          >
-            Create Room
-          </Typography>
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+            height: "10%",
+            marginTop: "20px",
+          }}
+        >
+          <img src={create} height={"100%"} />
         </div>
         <FormControl>
           <TextField
@@ -99,7 +92,7 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
             name="name"
             value={form.name}
             onChange={handleChange}
-            style={{ padding: 0, width: 350, marginBottom: 30 }}
+            style={{ padding: 0, width: 350, marginBottom: 28 }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start"></InputAdornment>
@@ -113,7 +106,7 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
             name="password"
             value={form.password}
             onChange={handleChange}
-            style={{ padding: 0, width: 350 }}
+            style={{ padding: 0, width: 350, marginBottom: 10 }}
             variant="outlined"
             InputProps={{
               startAdornment: (
@@ -206,6 +199,7 @@ export const DialogCreateRoom = ({ createRoomSocket, idRoom }) => {
                 backgroundColor: "#503EB9",
                 borderRadius: 0,
                 margin: 20,
+                boxShadow: "none",
               }}
               onClick={handleClick}
             >

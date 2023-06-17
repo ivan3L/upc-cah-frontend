@@ -9,6 +9,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { Score } from "../../components/Score/Score";
 import imagen from "../../assets/WTM Logo.png";
+import top5 from "../../assets/top5.png";
 
 export const Scoreboard = () => {
   const location = useLocation();
@@ -59,23 +60,18 @@ export const Scoreboard = () => {
             image={imagen}
             alt="WTM Logo"
           />
-          <Typography
-            variant="h3"
-            component="h1"
-            align="center"
-            style={{
-              fontFamily: "Axiforma Heavy",
-              color: "#F2DF35",
-              WebkitTextStroke: "4px black",
-              textStroke: "5px black",
-              marginTop: "10px",
-              marginBottom: "2px",
-              fontWeight: "900",
-              letterSpacing: "-4px", // Adjust the spacing here
+          <CardMedia
+            component="img"
+            sx={{
+              width: "20%",
+              height: "auto",
+              objectFit: "contain",
+              margin: "auto",
             }}
-          >
-            TOP 5
-          </Typography>
+            image={top5}
+            alt="scoreboard"
+          />
+
           {players.map((player, index) => (
             <Score key={player.id} player={player} index={index} />
           ))}
