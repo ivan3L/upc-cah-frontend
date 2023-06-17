@@ -9,7 +9,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { Score } from "../../components/Score/Score";
 import imagen from "../../assets/WTM Logo.png";
-import top5 from "../../assets/top5.png";
+import top5 from "../../assets/top5.svg";
 
 export const Scoreboard = () => {
   const location = useLocation();
@@ -66,7 +66,8 @@ export const Scoreboard = () => {
               width: "20%",
               height: "auto",
               objectFit: "contain",
-              margin: "auto",
+              marginTop: "15px",
+              marginBottom: "15px",
             }}
             image={top5}
             alt="scoreboard"

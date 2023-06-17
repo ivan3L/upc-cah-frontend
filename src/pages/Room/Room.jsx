@@ -204,8 +204,9 @@ export const Room = () => {
                 sx={{
                   width: "70%",
                   height: "100%",
+                  marginTop: "12px",
+                  marginBottom: "12px",
                   objectFit: "contain",
-                  margin: "auto",
                 }}
                 image={instrucciones}
                 alt="WTM Logo"
